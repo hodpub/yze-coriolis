@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.3](https://github.com/hodpub/yze-coriolis/compare/v4.0.2...v4.0.3) (2025-11-23)
+
+
+### Bug Fixes
+
+* solve issue on the combat tracker ([#307](https://github.com/hodpub/yze-coriolis/issues/307)) ([2d98494](https://github.com/hodpub/yze-coriolis/commit/2d9849429d8b7e8e2a0bc52f8e3d760ecccd53a9))
+
 ## [4.0.2](https://github.com/hodpub/yze-coriolis/compare/v4.0.1...v4.0.2) (2025-11-23)
 
 
