@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/hodpub/yze-coriolis/compare/v4.0.4...v4.1.0) (2025-11-23)
+
+
+### Miscellaneous Chores
+
+* release 4.1.0 ([1e03fdb](https://github.com/hodpub/yze-coriolis/commit/1e03fdb2665692462d3e20efde3b183f7ca36379))
+
 ## [4.0.4](https://github.com/hodpub/yze-coriolis/compare/v4.0.3...v4.0.4) (2025-11-23)
 
 
