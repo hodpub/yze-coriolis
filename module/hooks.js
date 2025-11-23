@@ -51,9 +51,9 @@ Hooks.on("renderDialog", (dialog, html) => {
 });
 
 Hooks.on("renderCombatTracker", (app, html, combatInfo) => {
-  const currentCombat = combatInfo.combats[combatInfo.currentIndex - 1];
+  const currentCombat = combatInfo.combat;
   if (currentCombat) {
-    html.find(".combatant").each((i, el) => {
+    $(html).find(".combatant").each((i, el) => {
       const id = el.dataset.combatantId;
       const combatant = currentCombat.combatants.find((c) => c.id === id);
       const initDiv = el.getElementsByClassName("token-initiative")[0];
