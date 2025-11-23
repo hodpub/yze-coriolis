@@ -27,13 +27,30 @@
           </div>
         </div>
       </div>
-      <div class="col-start-1 col-end-1 row-start-2 row-end-3">
-        {{!-- bottom half of ship sheet --}}
-        <div class="flex flex-dir-col">
+
+      {{!-- bottom half of ship sheet --}}
+      <div class="flex flex-dir-col">
+        
+        {{!-- middle part of ship sheet --}}
+        <div class="middle-part-container">
+          {{!-- Shield-Roll --}}
+          <div class="armor col-start-1 col-end-1 row-start-1 row-end-3 border-base border-gray-2 rounded background-blue-3 gray-2 font-cairo text-md pl-sm">
+            <div class="col-start-1 col-end-1 row-start-1 row-end-1 white-1">
+              {{localize "YZECORIOLIS.Armor"}}
+            </div>
+            <div class="col-start-1 col-end-1 row-start-2 row-end-2">
+              <input class="right-aligned-number-input" placeholder="0" type="number"
+              name="system.armor.value" value="{{system.armor.value}}" data-dtype="number"
+              min={{system.armor.min}} />
+            </div>
+            <div class="col-start-2 col-end-2 row-start-1 row-end-3 ship-armor-center animated-hover armor-roll">
+              <img class="armor-image" src="systems/yzecoriolis/css/icons/rolling-dices.svg">
+            </div>
+          </div>
           {{!-- HP Bar --}}
           <div
-            class="flex1 border-base border-gray-2 rounded background-blue-3 gray-2 font-cairo text-md pl-sm flexrow">
-            <div class="white-1">{{localize "YZECORIOLIS.HullPoints"}}</div>
+            class="col-start-2 col-end-2 row-start-1 row-end-1 flex1 border-base border-gray-2 rounded background-blue-3 gray-2 font-cairo text-md pl-sm flexrow">
+            <div class="white-1 hull-ep-width">{{localize "YZECORIOLIS.HullPoints"}}</div>
             <div class="bar hull-bar fr-basic flex7">
               {{#each hullBlocks as |hBlock index|}}
               {{#with ../system as | system |}}
@@ -55,8 +72,8 @@
           </div>
           {{!-- EP Bar --}}
           <div
-            class="flex1 border-base border-gray-2 rounded background-blue-3 gray-2 font-cairo text-md pl-sm mg-t-xsm flexrow">
-            <div class="white-1">{{localize "YZECORIOLIS.EnergyPoints"}}</div>
+            class="col-start-2 col-end-2 row-start-2 row-end-2 flex1 border-base border-gray-2 rounded background-blue-3 gray-2 font-cairo text-md pl-sm mg-t-xsm flexrow">
+            <div class="white-1 hull-ep-width">{{localize "YZECORIOLIS.EnergyPoints"}}</div>
             <div class="bar ep-bar fr-basic flex7">
               {{#each energyBlocks as |eBlock index|}}
               {{#if eBlock.on}}
@@ -74,102 +91,98 @@
               <span class="bar-value white-1">{{currentShipEP}}</span>
             </div>
           </div>
-          <div class="bottom-half-container">
-            {{!-- Stats --}}
-            <div class="col-start-1 col-end-2 row-start-1 row-end-2 basic-panel">
-              {{!-- Header --}}
-              <div class="h-header rounded-top-lg background-blue-5"></div>
-              {{!-- Stat lines --}}
-              <ol class="base-list">
-                <li class="flexrow margin-small">
-                  <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
-                    {{localize "YZECORIOLIS.MaxHullPoints"}}</div>
-                  <input class="right-aligned-number-input" placeholder="0" type="number"
-                    name="system.hullPoints.max" value="{{system.hullPoints.max}}" data-dtype="number"
-                    min=0 />
-                </li>
-                <li class="flexrow margin-small">
-                  <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
-                    {{localize "YZECORIOLIS.MaxEnergyPoints"}}</div>
-                  <input class="right-aligned-number-input" placeholder="0" type="number"
-                    name="system.maxEnergyPoints" value="{{system.maxEnergyPoints}}" data-dtype="number"
-                    min=0 />
-                </li>
-                <li class="flexrow margin-small">
-                  <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
-                    {{localize "YZECORIOLIS.Speed"}}</div>
-                  <input class="right-aligned-number-input" placeholder="0" type="number"
-                    name="system.speed.value" value="{{system.speed.value}}" data-dtype="number"
-                    min={{system.speed.min}} />
-                </li>
-                <li class="flexrow margin-small">
-                  <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
-                    {{localize "YZECORIOLIS.Manueverability"}}</div>
-                  <input class="right-aligned-number-input" placeholder="0" type="number"
-                    name="system.manueverability.value" value="{{system.manueverability.value}}"
-                    data-dtype="number" min={{system.manueverability.min}} />
-                </li>
-                <li class="flexrow margin-small">
-                  <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
-                    {{localize "YZECORIOLIS.Signature"}}</div>
-                  <input class="right-aligned-number-input" placeholder="0" type="number"
-                    name="system.signature.value" value="{{system.signature.value}}" data-dtype="number"
-                    min={{system.signature.min}} />
-                </li>
-                <li class="flexrow margin-small">
-                  <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
-                    {{localize "YZECORIOLIS.Armor"}}</div>
-                  <input class="right-aligned-number-input" placeholder="0" type="number"
-                    name="system.armor.value" value="{{system.armor.value}}" data-dtype="number"
-                    min={{system.armor.min}} />
-                </li>
-                <li class="flexrow margin-small">
-                  {{!-- Not doing flex-grow-2 here to accommodate large costs in input field  --}}
-                  <div class="font-cairo text-base capitalize white-1 self-center">
-                    {{localize "YZECORIOLIS.Value"}} ({{localize "YZECORIOLIS.Birr"}})</div>
-                  <input class="right-aligned-number-input" placeholder="0" type="number"
-                    name="system.cost.value" value="{{system.cost.value}}" data-dtype="number"
-                    min=0 />
-                </li>
-              </ol>
-            </div>
-            {{!-- Ship Sheet Tabs --}}
-            <div class="col-start-2 col-end-6 row-start-1 row-end-2 basic-panel">
-              <div class="h-header rounded-top-lg background-blue-5">
-                <nav class="navigation flexrow pt-2" data-group="primary">
-                  <a class="item nav-item-link active" data-tab="crew">{{localize "YZECORIOLIS.Crew"}}</a>
-                  <a class="item nav-item-link" data-tab="modules">{{localize "YZECORIOLIS.Modules"}}</a>
-                  <a class="item nav-item-link" data-tab="features">{{localize "YZECORIOLIS.Features"}}</a>
-                  <a class="item nav-item-link" data-tab="critDamage">{{localize "YZECORIOLIS.CriticalDamage"}}</a>
-                  <a class="item nav-item-link" data-tab="problems">{{localize "YZECORIOLIS.Problems"}}</a>
-                  <a class="item nav-item-link" data-tab="logbook">{{localize "YZECORIOLIS.Logbook"}}</a>
-                  <a class="item nav-item-link" data-tab="shipnotes">{{localize "YZECORIOLIS.Notes"}}</a>
-                </nav>
-               <section class="sheet-panels pt-3">
-                  {{!-- Crew  --}}
-                  {{> "systems/yzecoriolis/templates/actor/parts/ship-crew.html"}}
-                  {{!-- Modules --}}
-                  {{> "systems/yzecoriolis/templates/actor/parts/ship-modules.html"}}
-                  {{!-- Features --}}
-                  {{> "systems/yzecoriolis/templates/actor/parts/ship-features.html"}}
-                  {{!-- Critical Damage --}}
-                  {{> "systems/yzecoriolis/templates/actor/parts/ship-critical-damage.html"}}
-                  {{!-- Problems --}}
-                  {{> "systems/yzecoriolis/templates/actor/parts/ship-problems.html"}}
-                  {{!-- Logbook --}}
-                  {{> "systems/yzecoriolis/templates/actor/parts/ship-logbooks.html"}}
-                  {{!-- Notes --}}
-                  <div class="tab shipnotes" data-group="primary" data-tab="shipnotes">
-                    {{editor shipNotes target="system.notes" button=true owner=owner editable=editable}}
-                  </div>
-                </section>
+        </div>
+        
+        {{!-- bottom part of ship sheet --}}
+        <div class="col-start-1 col-end-1 row-start-3 row-end-4">
+          <div class="bottom-part-container">
+              {{!-- Stats --}}
+              <div class="col-start-1 col-end-2 row-start-1 row-end-2 basic-panel">
+                {{!-- Header --}}
+                <div class="h-header rounded-top-lg background-blue-5"></div>
+                {{!-- Stat lines --}}
+                <ol class="base-list">
+                  <li class="flexrow margin-small">
+                    <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
+                      {{localize "YZECORIOLIS.MaxHullPoints"}}</div>
+                    <input class="right-aligned-number-input" placeholder="0" type="number"
+                      name="system.hullPoints.max" value="{{system.hullPoints.max}}" data-dtype="number"
+                      min=0 />
+                  </li>
+                  <li class="flexrow margin-small">
+                    <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
+                      {{localize "YZECORIOLIS.MaxEnergyPoints"}}</div>
+                    <input class="right-aligned-number-input" placeholder="0" type="number"
+                      name="system.maxEnergyPoints" value="{{system.maxEnergyPoints}}" data-dtype="number"
+                      min=0/>
+                  </li>
+                  <li class="flexrow margin-small">
+                    <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
+                      {{localize "YZECORIOLIS.Speed"}}</div>
+                    <input class="right-aligned-number-input" placeholder="0" type="number"
+                      name="system.speed.value" value="{{system.speed.value}}" data-dtype="number"
+                      min={{system.speed.min}} />
+                  </li>
+                  <li class="flexrow margin-small">
+                    <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
+                      {{localize "YZECORIOLIS.Manueverability"}}</div>
+                    <input class="right-aligned-number-input" placeholder="0" type="number"
+                      name="system.manueverability.value" value="{{system.manueverability.value}}"
+                      data-dtype="number" min={{system.manueverability.min}} />
+                  </li>
+                  <li class="flexrow margin-small">
+                    <div class="flex-grow-2 font-cairo text-base capitalize white-1 self-center">
+                      {{localize "YZECORIOLIS.Signature"}}</div>
+                    <input class="right-aligned-number-input" placeholder="0" type="number"
+                      name="system.signature.value" value="{{system.signature.value}}" data-dtype="number"
+                      min={{system.signature.min}} />
+                  </li>
+                  <li class="flexrow margin-small">
+                    {{!-- Not doing flex-grow-2 here to accommodate large costs in input field  --}}
+                    <div class="font-cairo text-base capitalize white-1 self-center">
+                      {{localize "YZECORIOLIS.Value"}} ({{localize "YZECORIOLIS.Birr"}})</div>
+                    <input class="right-aligned-number-input" placeholder="0" type="number"
+                      name="system.cost.value" value="{{system.cost.value}}" data-dtype="number"
+                      min=0 />
+                  </li>
+                </ol>
+              </div>
+              {{!-- Ship Sheet Tabs --}}
+              <div class="col-start-2 col-end-6 row-start-1 row-end-2 basic-panel">
+                <div class="h-header rounded-top-lg background-blue-5">
+                  <nav class="navigation flexrow pt-2" data-group="primary">
+                    <a class="item nav-item-link active" data-tab="crew">{{localize "YZECORIOLIS.Crew"}}</a>
+                    <a class="item nav-item-link" data-tab="modules">{{localize "YZECORIOLIS.Modules"}}</a>
+                    <a class="item nav-item-link" data-tab="features">{{localize "YZECORIOLIS.Features"}}</a>
+                    <a class="item nav-item-link" data-tab="critDamage">{{localize "YZECORIOLIS.CriticalDamage"}}</a>
+                    <a class="item nav-item-link" data-tab="problems">{{localize "YZECORIOLIS.Problems"}}</a>
+                    <a class="item nav-item-link" data-tab="logbook">{{localize "YZECORIOLIS.Logbook"}}</a>
+                    <a class="item nav-item-link" data-tab="shipnotes">{{localize "YZECORIOLIS.Notes"}}</a>
+                  </nav>
+                <section class="sheet-panels pt-3">
+                    {{!-- Crew  --}}
+                    {{> "systems/yzecoriolis/templates/actor/parts/ship-crew.html"}}
+                    {{!-- Modules --}}
+                    {{> "systems/yzecoriolis/templates/actor/parts/ship-modules.html"}}
+                    {{!-- Features --}}
+                    {{> "systems/yzecoriolis/templates/actor/parts/ship-features.html"}}
+                    {{!-- Critical Damage --}}
+                    {{> "systems/yzecoriolis/templates/actor/parts/ship-critical-damage.html"}}
+                    {{!-- Problems --}}
+                    {{> "systems/yzecoriolis/templates/actor/parts/ship-problems.html"}}
+                    {{!-- Logbook --}}
+                    {{> "systems/yzecoriolis/templates/actor/parts/ship-logbooks.html"}}
+                    {{!-- Notes --}}
+                    <div class="tab shipnotes" data-group="primary" data-tab="shipnotes">
+                      {{editor shipNotes target="system.notes" button=true owner=owner editable=editable}}
+                    </div>
+                  </section>
+                </div>
               </div>
             </div>
-          </div>
         </div>
-
       </div>
+
     </div>
   </div>
-
 </form>

@@ -57,14 +57,14 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/martel/v11/PN_xRfK9oXHga0XtYQ.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/martel/v12/PN_xRfK9oXHga0XtYQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Martel';
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/martel/v11/PN_yRfK9oXHga0XVwe4ahQ.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/martel/v12/PN_yRfK9oXHga0XVwe4ahQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -72,7 +72,7 @@
   font-weight: 300;
   font-stretch: normal;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/roboto/v48/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabWmT.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabWmT.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -80,7 +80,7 @@
   font-weight: 400;
   font-stretch: normal;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/roboto/v48/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmT.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmT.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Roboto';
@@ -88,7 +88,7 @@
   font-weight: 500;
   font-stretch: normal;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/roboto/v48/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bWmT.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bWmT.ttf) format('truetype');
 }
 .resource-label {
   font-weight: bold;
@@ -2220,7 +2220,7 @@ amending some classes to help official modules work in v13
   height: 25px;
   padding: 0px 35px 0px 10px;
   border: none;
-  background: url("icons/drop-down-arrow.svg") 6.4% no-repeat rgba(113, 130, 190, 0.44);
+  background: url("icons/drop-down-arrow.svg") 96% / 15% no-repeat rgba(113, 130, 190, 0.44);
   background-position: right 0.7em top 50%;
 }
 .yzecoriolis.sheet.actor .sheet-body .bio-stats .bio-block select:focus {
@@ -2298,7 +2298,30 @@ amending some classes to help official modules work in v13
   grid-column-gap: 10px;
   grid-row-gap: 10px;
 }
-.yzecoriolis.sheet.actor .ship .bottom-half-container {
+.yzecoriolis.sheet.actor .ship .middle-part-container {
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  grid-column-gap: 10px;
+  min-height: 69px;
+}
+.yzecoriolis.sheet.actor .ship .middle-part-container .armor {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-column-gap: 10px;
+}
+.yzecoriolis.sheet.actor .ship .middle-part-container .armor-image {
+  border: none;
+  height: 3em;
+}
+.yzecoriolis.sheet.actor .ship .hull-ep-width {
+  min-width: fit-content;
+  max-width: 6.5em;
+}
+.yzecoriolis.sheet.actor .ship .ship-armor-center {
+  align-content: center;
+  justify-items: center;
+}
+.yzecoriolis.sheet.actor .ship .bottom-part-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(1, 1fr);

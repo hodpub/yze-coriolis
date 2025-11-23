@@ -1242,7 +1242,35 @@
       grid-row-gap: @padding-md;
     }
 
-    .bottom-half-container {
+    .middle-part-container {
+      display: grid;
+      grid-template-columns: 1fr 7fr;
+      grid-column-gap: 10px;
+      min-height: 69px;
+    }
+
+    .middle-part-container .armor {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-column-gap: 10px;
+    }
+
+    .middle-part-container .armor-image {
+      border: none;
+      height: 3em;
+    }
+
+    .hull-ep-width {
+      min-width: fit-content;
+      max-width: 6.5em;
+    }
+
+    .ship-armor-center {
+      align-content: center;
+      justify-items: center;
+    }
+
+    .bottom-part-container {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(1, 1fr);

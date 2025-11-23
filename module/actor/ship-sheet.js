@@ -222,6 +222,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
     // rolling
     html.find(".crew-portrait").click(this._onRollCrewPosition.bind(this));
     html.find(".module-roll").click(this._onRollModuleWeapon.bind(this));
+    html.find(".armor-roll").click(this._onRollArmor.bind(this));
 
     // crew portrait hovering flourishes
     html
@@ -253,7 +254,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
     event.preventDefault();
     const targetButton = event.currentTarget;
     const type = targetButton.dataset.type;
-    const dataset = foundry.utils.deepClone(targetButton.dataset);
+    const dataset = Object.assign({}, foundry.utils.deepClone(targetButton.dataset));
     const name = dataset.defaultname;
     let imgPath = "";
     if (dataset.category === "weapon") {
@@ -298,7 +299,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
     const targetButton = event.currentTarget;
     const type = targetButton.dataset.type;
     // Grab any data associated with this control.
-    const dataset = foundry.utils.deepClone(targetButton.dataset);
+    const dataset = Object.assign({}, foundry.utils.deepClone(targetButton.dataset));
     // Initialize a default name.
     const name = dataset.defaultname;
     // Prepare the item object.
@@ -554,6 +555,41 @@ export class yzecoriolisShipSheet extends ActorSheet {
     const chatOptions = ship._prepareChatRollOptions(
       "systems/yzecoriolis/templates/sidebar/roll.html",
       "weapon"
+    );
+    new CoriolisModifierDialog(rollData, chatOptions).render(true);
+  }
+
+  async _onRollArmor(event) {
+    event.preventDefault();
+    const ship = this.actor;
+    const shipName = ship.name;
+    const shipArmor = parseInt(ship.system.armor.value);
+    const characterName = game.user.character.name;
+
+    // For rolling on the ship sheet, the user who owns that actor can roll on
+    // the ship sheet. The GM can also roll any actor.
+    const isGM = game.user.isGM;
+    const isRollingForOwnActor = hasOwnerPermissionLevel(ship.permission);
+    if (!isGM && !isRollingForOwnActor) {
+      ui.notifications.error(
+        game.i18n.localize("YZECORIOLIS.InvalidCrewRollPermissions")
+      );
+      return;
+    }
+
+    // create the roll based off the actor-item-armor-roll
+    const rollData = {
+      actorType: "character",
+      rollType: "armor",
+      modifier: 0,
+      features: "",
+      bonus: shipArmor,
+      rollTitle: characterName + "\n- " + shipName + " " + game.i18n.localize("YZECORIOLIS.Armor"),
+      pushed: false,
+    };
+    const chatOptions = ship._prepareChatRollOptions(
+      "systems/yzecoriolis/templates/sidebar/roll.html",
+      "armor"
     );
     new CoriolisModifierDialog(rollData, chatOptions).render(true);
   }

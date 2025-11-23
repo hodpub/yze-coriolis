@@ -4,7 +4,7 @@ export const toggleShipModule = async (shipEntity, moduleId) => {
   const moduleData = getShipModule(shipEntity, moduleId);
   const updateData = {
     _id: moduleData.id,
-    data: {
+    system: {
       enabled: !moduleData.system.enabled,
     },
   };
