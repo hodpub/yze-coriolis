@@ -2,7 +2,7 @@
     "id": "yzecoriolis",
     "title": "Coriolis",
     "description": "Coriolis System for Foundry VTT.",
-    "version": "4.0.1",
+    "version": "4.0.4",
     "compatibility": {
         "minimum": "13",
         "verified": "13",
@@ -79,6 +79,6 @@
     "secondaryTokenAttribute": "power",
     "url": "",
     "protected": false,
-    "manifest": "https://github.com/winks-vtt/yze-coriolis/releases/latest/download/system.json",
-    "download": "https://github.com/winks-vtt/yze-coriolis/releases/download/v4.0.1/coriolis.zip"
+    "manifest": "https://github.com/hodpub/yze-coriolis/releases/latest/download/system.json",
+    "download": "https://github.com/hodpub/yze-coriolis/releases/download/v4.0.4/coriolis.zip"
 }
