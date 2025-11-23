@@ -1,5 +1,17 @@
 # Changelog
 
+### [4.0.2](https://www.github.com/hodpub/yze-coriolis/compare/v4.0.1...v4.0.2) (2025-11-23)
+
+
+### Bug Fixes
+
+* Allow the GM to roll the Armor selecting a actor on the scene ([e1f63d2](https://www.github.com/hodpub/yze-coriolis/commit/e1f63d2acc1a4231b99007c0952156a903713127))
+
+
+### Miscellaneous
+
+* Add `linkedToFoundry` ([c6c0c27](https://www.github.com/hodpub/yze-coriolis/commit/c6c0c276547a863484a282f9dbd496553c8c7c1a))
+
 ### [4.0.1](https://www.github.com/winks-vtt/yze-coriolis/compare/v4.0.0...v4.0.1) (2025-08-30)
 
 
