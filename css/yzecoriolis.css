@@ -3133,3 +3133,13 @@ amending some classes to help official modules work in v13
   opacity: 1;
   box-shadow: 0 0 1em red;
 }
+
+/* ----------------------------------------- */
+/*  Dark Theme handler                       */
+/* ----------------------------------------- */
+select[name="core.uiConfig.colorScheme.applications"]{
+  option[value="dark"],
+  option[value=""] {
+    display: none;
+  }
+}

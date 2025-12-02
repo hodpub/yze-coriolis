@@ -386,6 +386,12 @@ Hooks.on("getSceneControlButtons", (controls) => {
 
 Hooks.once("ready", async function () {
   // Determine whether a system migration is required and feasible
+
+  if (document.body.classList.contains('theme-dark')) {
+    const uiConfig = game.settings.get('core', 'uiConfig');
+    uiConfig.colorScheme.applications = 'light';
+    await game.settings.set('core', 'uiConfig', uiConfig);
+  }
   const currentVersion = game.system.version;
   const lastMigratedToVersion = game.settings.get(
     "yzecoriolis",
