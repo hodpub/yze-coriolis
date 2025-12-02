@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.2.0](https://github.com/hodpub/yze-coriolis/compare/v4.1.0...v4.2.0) (2025-12-02)
+
+
+### Features
+
+* remove dark mode (Fixes [#309](https://github.com/hodpub/yze-coriolis/issues/309)) ([d05ee9c](https://github.com/hodpub/yze-coriolis/commit/d05ee9c82ac29b93c013d06dba207e41bb2333a9))
+
 ## [4.1.0](https://github.com/hodpub/yze-coriolis/compare/v4.0.4...v4.1.0) (2025-11-23)
 
 
