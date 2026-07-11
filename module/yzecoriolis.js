@@ -22,6 +22,13 @@ import {
 import { coriolisJournalSheet } from "./coriolisJournal.js";
 import { DarknessPointDisplay } from "./darkness-points.js";
 
+// Compat shim for older modules (e.g. coriolis-corerules) that still call the
+// pre-v14 global. Prefer foundry.utils.isNewerVersion in system code.
+globalThis.isNewerVersion ??= foundry.utils.isNewerVersion;
+
+const { DocumentSheetConfig } = foundry.applications.apps;
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
+
 Hooks.once("init", async function () {
   console.log(`Coriolis | Initializing Coriolis\n${YZECORIOLIS.ASCII}`);
   game.yzecoriolis = {
@@ -32,16 +39,11 @@ Hooks.once("init", async function () {
     migrations: migrations,
   };
 
-  // Setup TinyMCE stylings
-  CONFIG.TinyMCE.content_css = "systems/yzecoriolis/css/yzecoriolismce.css";
-
-  // foundry.appv1.sheets.JournalSheet;
-  // JournalEntry
   DocumentSheetConfig.registerSheet(
-    foundry.appv1.sheets.JournalSheet,
+    JournalEntry,
     "yzecoriolis",
     coriolisJournalSheet,
-    { makeDefault: true }
+    { makeDefault: false }
   );
 
   preloadHandlerbarsTemplates();
@@ -55,25 +57,20 @@ Hooks.once("init", async function () {
   registerSystemSettings();
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("yzecoriolis", yzecoriolisActorSheet, {
-    types: ["character"],
+  DocumentSheetConfig.unregisterSheet(Actor, "core", ActorSheet);
+  DocumentSheetConfig.registerSheet(Actor, "yzecoriolis", yzecoriolisActorSheet, {
+    types: ["character", "npc"],
     makeDefault: true,
     label: "YZECORIOLIS.SheetClassCharacter",
   });
-  Actors.registerSheet("yzecoriolis", yzecoriolisActorSheet, {
-    types: ["npc"],
-    makeDefault: true,
-    label: "YZECORIOLIS.SheetClassNPC",
-  });
-  Actors.registerSheet("yzecoriolis", yzecoriolisShipSheet, {
+  DocumentSheetConfig.registerSheet(Actor, "yzecoriolis", yzecoriolisShipSheet, {
     types: ["ship"],
     makeDefault: true,
     label: "YZECORIOLIS.SheetClassShip",
   });
 
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("yzecoriolis", yzecoriolisItemSheet, {
+  DocumentSheetConfig.unregisterSheet(Item, "core", ItemSheet);
+  DocumentSheetConfig.registerSheet(Item, "yzecoriolis", yzecoriolisItemSheet, {
     makeDefault: true,
     label: "SheetClassItem",
   });
@@ -92,6 +89,15 @@ Hooks.once("init", async function () {
 
   // Initialize Darkness Point Display
   DarknessPointDisplay.initialize();
+
+  // Foundry removed the block {{#select}} helper (use selectOptions going forward).
+  // Keep a local shim so existing templates keep working.
+  Handlebars.registerHelper("select", function (selected, options) {
+    const value = selected == null ? "" : String(selected);
+    const escaped = value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const html = options.fn(this);
+    return html.replace(new RegExp(` value=["']${escaped}["']`), "$& selected");
+  });
 
   Handlebars.registerHelper("concat", function () {
     var outStr = "";
@@ -340,16 +346,16 @@ Hooks.once("setup", function () {
 
 // eslint-disable-next-line no-unused-vars
 Hooks.on("renderChatMessageHTML", (msg, html, context) => {
-  coriolisChatListeners($(html));
+  coriolisChatListeners(html);
   // Do not display "Blind" chat cards to non-gm
-  if ($(html).hasClass("blind") && !game.user.isGM) {
+  if (html.classList.contains("blind") && !game.user.isGM) {
     // since the header has timestamp content we'll remove the content instead.
     // this avoids an NPE when foundry tries to update the timestamps.
-    $(html).find(".message-content").remove();
+    html.querySelector(".message-content")?.remove();
   }
   // remove push option from non-authors
-  if (!game.user.isGM && msg.message.user !== game.user.id) {
-    $(html).find(".dice-push").remove();
+  if (!game.user.isGM && !msg.isAuthor) {
+    html.querySelectorAll(".dice-push").forEach((el) => el.remove());
   }
 });
 
@@ -360,6 +366,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
       title: "YZECORIOLIS.DarknessPoints",
       icon: "fas fa-question",
       button: true,
+      order: 100,
       visible: game.user.isGM,
       onChange: () => {
         displayDarknessPoints();
@@ -370,6 +377,7 @@ Hooks.on("getSceneControlButtons", (controls) => {
       title: "YZECORIOLIS.DarknessPointsControls",
       icon: "fas fa-moon",
       button: true,
+      order: 101,
       visible: game.settings.get("yzecoriolis", "DarknessPointsVisibility")
         ? true
         : game.user.isGM,
@@ -387,10 +395,24 @@ Hooks.on("getSceneControlButtons", (controls) => {
 Hooks.once("ready", async function () {
   // Determine whether a system migration is required and feasible
 
-  if (document.body.classList.contains('theme-dark')) {
-    const uiConfig = game.settings.get('core', 'uiConfig');
-    uiConfig.colorScheme.applications = 'light';
-    await game.settings.set('core', 'uiConfig', uiConfig);
+  // Force light application chrome under the dark body theme. Defer until ChatLog
+  // has rendered — setting uiConfig too early crashes ChatLog._toggleNotifications.
+  if (document.body.classList.contains("theme-dark")) {
+    const applyLightApplicationTheme = async () => {
+      const uiConfig = foundry.utils.deepClone(
+        game.settings.get("core", "uiConfig")
+      );
+      if (uiConfig.colorScheme?.applications === "light") return;
+      uiConfig.colorScheme.applications = "light";
+      await game.settings.set("core", "uiConfig", uiConfig);
+    };
+    if (ui.chat?.element?.querySelector("#chat-controls, .chat-controls")) {
+      await applyLightApplicationTheme();
+    } else {
+      Hooks.once("renderChatLog", () => {
+        applyLightApplicationTheme();
+      });
+    }
   }
   const currentVersion = game.system.version;
   const lastMigratedToVersion = game.settings.get(
@@ -402,14 +424,17 @@ Hooks.once("ready", async function () {
   const COMPATIBLE_MIGRATION_VERSION = "1.4.7";
 
   let needMigration =
-    isNewerVersion(currentVersion, NEEDS_MIGRATION_AFTER_VERSION) &&
-    isNewerVersion(NEEDS_MIGRATION_AFTER_VERSION, lastMigratedToVersion);
+    foundry.utils.isNewerVersion(currentVersion, NEEDS_MIGRATION_AFTER_VERSION) &&
+    foundry.utils.isNewerVersion(
+      NEEDS_MIGRATION_AFTER_VERSION,
+      lastMigratedToVersion
+    );
 
   // Perform the migration
   if (needMigration && game.user.isGM) {
     if (
       currentVersion &&
-      isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion)
+      foundry.utils.isNewerVersion(COMPATIBLE_MIGRATION_VERSION, currentVersion)
     ) {
       ui.notifications.error(game.i18n.localize("ErrorsOldFoundryVersion"), {
         permanent: true,
@@ -482,7 +507,7 @@ async function createYzeCoriolisMacro(documentData, slot) {
     return ui.notifications.warn(
       game.i18n.localize("YZECORIOLIS.ErrorsNotOwnedItemForMacro")
     );
-  const item = await fromUuid(documentData.uuid, false);
+  const item = await fromUuid(documentData.uuid);
   if (!item || (item.type !== "weapon" && item.type !== "armor")) {
     return ui.notifications.warn(
       game.i18n.localize("YZECORIOLIS.ErrorsNoItemForMacro")

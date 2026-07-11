@@ -1,8 +1,5 @@
 export const getID = function () {
-  // Math.random should be unique because of its seeding algorithm.
-  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-  // after the decimal.
-  return "_" + Math.random().toString(36).substr(2, 9);
+  return foundry.utils.randomID(16);
 };
 
 export const getItemsByType = (itemType) => {
@@ -41,7 +38,17 @@ export const getActorDataById = (actorId) => {
   return actor;
 };
 
-export const hasOwnerPermissionLevel = (perm) => {
-  const levels = CONST.DOCUMENT_PERMISSION_LEVELS || CONST.DOCUMENT_OWNERSHIP_LEVELS;
-  return perm === levels?.OWNER;
+/**
+ * @param {Document|number|string} docOrLevel Document or ownership level
+ * @returns {boolean}
+ */
+export const hasOwnerPermissionLevel = (docOrLevel) => {
+  if (docOrLevel && typeof docOrLevel === "object" && "testUserPermission" in docOrLevel) {
+    return docOrLevel.testUserPermission(game.user, "OWNER");
+  }
+  if (docOrLevel && typeof docOrLevel === "object" && "isOwner" in docOrLevel) {
+    return docOrLevel.isOwner;
+  }
+  const levels = CONST.DOCUMENT_OWNERSHIP_LEVELS;
+  return docOrLevel === levels?.OWNER;
 };

@@ -4,11 +4,10 @@
     "description": "Coriolis System for Foundry VTT.",
     "version": "4.3.0",
     "compatibility": {
-        "minimum": "13",
-        "verified": "13",
-        "maximum": "13"
+        "minimum": "14",
+        "verified": "14",
+        "maximum": "14"
     },
-    "templateVersion": 2,
     "authors": [
         {
             "name": "Winks"
@@ -23,24 +22,16 @@
         "module/hooks.js"
     ],
     "styles": [
-        "css/yzecoriolis.css",
-        "css/yzecoriolismce.css"
+        { "src": "css/yzecoriolis.css" },
+        { "src": "css/yzecoriolismce.css" }
     ],
-    "relationships": {
-        "systems": [
-            {
-                "id": "yzecoriolis"
-            }
-        ]
-    },
     "scripts": [],
     "packs": [
         {
             "name": "ship_sheet_instructions",
             "label": "Ship Sheet Instructions",
-            "path": "packs/ship-sheet-instructions.db",
-            "type": "JournalEntry",
-            "module": "Coriolis"
+            "path": "packs/ship-sheet-instructions",
+            "type": "JournalEntry"
         }
     ],
     "languages": [
@@ -79,8 +70,8 @@
         "distance": 1,
         "units": "m"
     },
-    "primaryTokenAttribute": "health",
-    "secondaryTokenAttribute": "power",
+    "primaryTokenAttribute": "hitPoints",
+    "secondaryTokenAttribute": "mindPoints",
     "url": "",
     "protected": false,
     "manifest": "https://github.com/hodpub/yze-coriolis/releases/latest/download/system.json",

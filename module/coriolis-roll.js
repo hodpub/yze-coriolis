@@ -26,7 +26,7 @@ export async function coriolisRoll(chatOptions, rollData) {
     ? createAutomaticFireFormula(totalDice, rollData.numberOfIgnoredOnes)
     : `${totalDice}d6`;
   let roll = new Roll(formula);
-  await roll.evaluate({ async: false });
+  await roll.evaluate();
   /* await showDiceSoNice(roll, chatOptions.rollMode); */
   const result = evaluateCoriolisRoll(rollData, roll);
   await showChatMessage(chatOptions, result, roll);
@@ -40,12 +40,13 @@ export async function coriolisRoll(chatOptions, rollData) {
  */
 export async function coriolisPushRoll(chatMessage, origRollData, origRoll) {
     origRollData.pushed = true;
+    const Die = foundry.dice.terms.Die;
     for (let part of origRoll.dice) {
       for (let r of part.results) {
         if (r.result !== CONFIG.YZECORIOLIS.maxRoll) {
-          let newDie = new Die(6);
-          await newDie.roll(1);
-          r.result = newDie.results[0].result;
+          const newDie = new Die({ faces: 6 });
+          const rolled = await newDie.roll();
+          r.result = rolled.result;
         }
       }
 
@@ -54,14 +55,18 @@ export async function coriolisPushRoll(chatMessage, origRollData, origRoll) {
       if (!part.modifiers.includes("x>1")) {
         part.number = part.number + bonus;
         for (let i = 0; i < bonus; i++) {
-          let newDie = new Die(6);
-          await newDie.roll(1);
-          part.results.push(newDie.results[0]);
+          const newDie = new Die({ faces: 6 });
+          const rolled = await newDie.roll();
+          part.results.push({ result: rolled.result, active: true });
         }
       }
     }
 
-    await showDiceSoNice(origRoll, chatMessage.rollMode);
+    const messageMode =
+      chatMessage.getFlag("yzecoriolis", "messageMode") ??
+      foundry.dice.Roll._mapLegacyRollMode(chatMessage.rollMode) ??
+      game.settings.get("core", "messageMode");
+    await showDiceSoNice(origRoll, messageMode);
     const result = evaluateCoriolisRoll(origRollData, origRoll);
     await updateChatMessage(chatMessage, result, origRoll);
     if (origRollData.actorType === "npc") {
@@ -162,7 +167,7 @@ function getTotalDice(rollData) {
 }
 
 async function showChatMessage(chatMsgOptions, resultData, roll) {
-  let tooltip = await renderTemplate(
+  let tooltip = await foundry.applications.handlebars.renderTemplate(
     "systems/yzecoriolis/templates/sidebar/dice-results.html",
     getTooltipData(resultData, roll)
   );
@@ -197,19 +202,23 @@ async function showChatMessage(chatMsgOptions, resultData, roll) {
     itemModifiersChecked: getRollModifiersChecked(resultData.rollData),
   };
 
-  if (["gmroll", "blindroll"].includes(chatMsgOptions.rollMode))
-    chatMsgOptions["whisper"] = ChatMessage.getWhisperRecipients("GM");
-  if (chatMsgOptions.rollMode === "blindroll") chatMsgOptions["blind"] = true;
-  else if (chatMsgOptions.rollMode === "selfroll")
-    chatMsgOptions["whisper"] = [game.user];
+  const legacyMode = chatMsgOptions.rollMode ?? chatMsgOptions.messageMode;
+  const messageMode = foundry.dice.Roll._mapLegacyRollMode(legacyMode);
+  delete chatMsgOptions.rollMode;
+  delete chatMsgOptions.whisper;
+  delete chatMsgOptions.blind;
 
   chatMsgOptions.roll = roll;
-  const html = await renderTemplate(chatMsgOptions.template, chatData);
+  const html = await foundry.applications.handlebars.renderTemplate(
+    chatMsgOptions.template,
+    chatData
+  );
   chatMsgOptions["content"] = html;
   chatMsgOptions["rolls"] = [roll];
-  const msg = await ChatMessage.create(chatMsgOptions);
+  const msg = await ChatMessage.create(chatMsgOptions, { messageMode });
   // attach the results to the chat message so we can push later if needed.
   await msg.setFlag("yzecoriolis", "results", chatData.results);
+  await msg.setFlag("yzecoriolis", "messageMode", messageMode);
   return msg;
 }
 
@@ -218,7 +227,7 @@ async function updateChatMessage(
   resultData,
   origRoll
 ) {
-  let tooltip = await renderTemplate(
+  let tooltip = await foundry.applications.handlebars.renderTemplate(
     "systems/yzecoriolis/templates/sidebar/dice-results.html",
     getTooltipData(resultData, origRoll)
   );
@@ -254,20 +263,20 @@ async function updateChatMessage(
     prayerModifiersChecked: getPrayerModifiersChecked(resultData.rollData),
   };
 
-  return renderTemplate(
+  const html = await foundry.applications.handlebars.renderTemplate(
     "systems/yzecoriolis/templates/sidebar/roll.html",
     chatData
-  ).then((html) => {
-    chatMessage["content"] = html;
-    return chatMessage
-      .update({
-        content: html,
-        ["flags.data"]: { results: chatData.results },
-      })
-      .then((newMsg) => {
-        ui.chat.updateMessage(newMsg);
-      });
+  );
+  const newMsg = await chatMessage.update({
+    content: html,
+    flags: {
+      yzecoriolis: {
+        results: chatData.results,
+      },
+    },
   });
+  ui.chat.updateMessage(newMsg);
+  return newMsg;
 }
 
 function getRollTitle(rollData) {
@@ -429,65 +438,58 @@ function getPrayerModifiersChecked(rollData) {
 }
 
 export async function coriolisChatListeners(html) {
-  $(html).on("click", ".dice-push", (ev) => {
-    let button = $(ev.currentTarget),
-      messageId = button.parents(".message").attr("data-message-id"),
-      message = game.messages.get(messageId);
-    let results = message.getFlag("yzecoriolis", "results");
-    console.log(message);
-    let originalRoll = message.rolls[0]; // TODO: handle this in a safer manner.
-    if (message.flags.data?.results.pushed) {
-      let errorObj = { error: "YZECORIOLIS.ErrorsAlreadyPushed" };
-      ui.notifications.error(new Error(game.i18n.localize(errorObj.error)));
-      return;
-    } else {
-      new CoriolisModifierDialog(
-        message,
-        results.rollData,
-        originalRoll
-      ).render(true);
-    }
+  const root = html instanceof HTMLElement ? html : html?.[0];
+  if (!root) return;
+
+  root.querySelectorAll(".dice-push").forEach((button) => {
+    button.addEventListener("click", (ev) => {
+      const messageEl = ev.currentTarget.closest(".message, .chat-message");
+      const messageId = messageEl?.dataset.messageId;
+      const message = game.messages.get(messageId);
+      if (!message) return;
+      const results = message.getFlag("yzecoriolis", "results");
+      const originalRoll = message.rolls?.[0];
+      if (!results || !originalRoll) return;
+      if (results.pushed || message.getFlag("yzecoriolis", "results")?.pushed) {
+        ui.notifications.error(
+          new Error(game.i18n.localize("YZECORIOLIS.ErrorsAlreadyPushed"))
+        );
+        return;
+      }
+      new CoriolisModifierDialog(message, results.rollData, originalRoll).render(
+        true
+      );
+    });
   });
 }
 /**
  * Add support for the Dice So Nice module
  * @param {Object} roll
- * @param {String} rollMode
+ * @param {String} messageMode
  */
-async function showDiceSoNice(roll, rollMode) {
+async function showDiceSoNice(roll, messageMode) {
   if (
     game.modules.get("dice-so-nice") &&
     game.modules.get("dice-so-nice").active
   ) {
     let whisper = null;
     let blind = false;
-    switch (rollMode) {
-      case "blindroll": //GM only
+    const mode = foundry.dice.Roll._mapLegacyRollMode(messageMode);
+    switch (mode) {
+      case "blind":
         blind = true;
       // fall through
       // eslint-disable-next-line no-fallthrough
-      case "gmroll": {
-        //GM + rolling player
-        let gmList = game.users.filter((user) => user.isGM);
-        let gmIDList = [];
-        gmList.forEach((gm) => gmIDList.push(gm._id));
-        whisper = gmIDList;
+      case "gm": {
+        whisper = game.users.filter((user) => user.isGM).map((gm) => gm.id);
         break;
       }
-      case "roll": {
-        //everybody
-        let userList = game.users.filter((user) => user.active);
-        let userIDList = [];
-        userList.forEach((user) => userIDList.push(user._id));
-        whisper = userIDList;
+      case "public": {
+        whisper = game.users.filter((user) => user.active).map((user) => user.id);
         break;
       }
-      case "selfroll": {
-        // only roll to yourself
-        let selfList = game.users.filter((user) => user._id === game.user._id);
-        let selfIDList = [];
-        selfList.forEach((user) => selfIDList.push(user._id));
-        whisper = selfIDList;
+      case "self": {
+        whisper = [game.user.id];
         break;
       }
     }

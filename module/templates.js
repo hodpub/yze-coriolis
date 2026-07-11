@@ -26,5 +26,5 @@ export const preloadHandlerbarsTemplates = async function () {
     "systems/yzecoriolis/templates/dialog/roll-modifiers.html",
   ];
 
-  return loadTemplates(templatePaths);
+  return foundry.applications.handlebars.loadTemplates(templatePaths);
 };

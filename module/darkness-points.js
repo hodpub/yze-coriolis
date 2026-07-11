@@ -5,6 +5,8 @@
 // model in future foundry allows for custom world setting permission, this code
 // could be simplified.
 
+const { Application } = foundry.appv1.api;
+
 export async function addDarknessPoints(points) {
   // local user cache
   let dpObj = getDarknessPointsForUserID(game.user.id);
@@ -76,9 +78,9 @@ async function showDarknessPoints(totalPoints) {
   let gmUser = gmList[0];
 
   let messageData = {
-    user: gmUser.id,
+    author: gmUser.id,
     speaker: ChatMessage.getSpeaker({ user: gmUser }),
-    whisper: gmList,
+    whisper: gmList.map((u) => u.id),
   };
 
   const dpData = {
@@ -86,7 +88,7 @@ async function showDarknessPoints(totalPoints) {
     totalPoints: totalPoints,
   };
 
-  messageData.content = await renderTemplate(
+  messageData.content = await foundry.applications.handlebars.renderTemplate(
     "systems/yzecoriolis/templates/sidebar/darkness-points-chat.html",
     dpData
   );
@@ -107,7 +109,7 @@ export class DarknessPointDisplay extends Application {
   }
 
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: "coriolis-darness-points-display",
       template:
         "systems/yzecoriolis/templates/darkness-points/darkness-points-display.html",

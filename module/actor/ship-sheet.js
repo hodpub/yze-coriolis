@@ -21,6 +21,8 @@ import {
 import { toggleShipModule } from "../item/ship-module.js";
 import { CoriolisModifierDialog } from "../coriolisRollModifier.js";
 
+const { ActorSheet } = foundry.appv1.sheets;
+
 /**
  * Extend the basic ActorSheet for a basic Coriolis ship sheet
  * @extends {ActorSheet}
@@ -79,7 +81,9 @@ export class yzecoriolisShipSheet extends ActorSheet {
     if (shipImageSet) {
       imageCSSClass = "object-fit-cover";
     }
-    const shipNotes = await TextEditor.enrichHTML(baseData.actor.system.notes, {
+    const shipNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      baseData.actor.system.notes,
+      {
       async: true,
     });
     const sheetData = {
@@ -413,7 +417,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
 
     //  you own a character (in the case you may
     // be running two different characters at the same time in a session)
-    const isRollingForOwnActor = hasOwnerPermissionLevel(crewEntity.permission);
+    const isRollingForOwnActor = hasOwnerPermissionLevel(crewEntity);
 
     if (!isGM && !isRollingForOwnActor) {
       ui.notifications.error(
@@ -474,7 +478,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
         && shipId === actor.system.bio.crewPosition.shipId)
         {
           crewMembers[actor._id] = actor;
-          if (hasOwnerPermissionLevel(actor.permission)) {
+          if (hasOwnerPermissionLevel(actor)) {
             crewMembersControlled[actor._id] = actor;
           }
       }
@@ -576,7 +580,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
     // For rolling on the ship sheet, the user who owns that actor can roll on
     // the ship sheet. The GM can also roll any actor.
     const isGM = game.user.isGM;
-    const isRollingForOwnActor = hasOwnerPermissionLevel(ship.permission);
+    const isRollingForOwnActor = hasOwnerPermissionLevel(ship);
     if (!isGM && !isRollingForOwnActor) {
       ui.notifications.error(
         game.i18n.localize("YZECORIOLIS.InvalidCrewRollPermissions")

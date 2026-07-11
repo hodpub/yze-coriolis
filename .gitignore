@@ -9,8 +9,9 @@ module/foundry.js
 foundry.js
 foundry_07.js
 
-# foundry
+# Ignore binary LevelDB packs (built from packs/source via yarn build:packs / CI).
 packs/ship-sheet-instructions/
+packs/*.db
 
 # OS
 .DS_Store

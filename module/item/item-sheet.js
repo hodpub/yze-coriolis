@@ -1,4 +1,7 @@
 import { getID } from "../util.js";
+
+const { ItemSheet } = foundry.appv1.sheets;
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -36,7 +39,7 @@ export class yzecoriolisItemSheet extends ItemSheet {
   /** @override */
   async getData(options) {
     const baseData = super.getData(options);
-    const itemDescript = await TextEditor.enrichHTML(
+    const itemDescript = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       baseData.item.system.description,
       {
         async: true,

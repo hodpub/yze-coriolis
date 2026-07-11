@@ -1,12 +1,16 @@
 import { coriolisRoll } from "./coriolis-roll.js";
 
+const { FormApplication } = foundry.appv1.api;
+
 export class CoriolisModifierDialog extends FormApplication {
     constructor(rollData, chatOptions) {
       super();
       this.rollData = rollData;
       this.chatOptions = chatOptions;
       this.rollVisibility = game.settings.get("yzecoriolis", "RollVisibility");
-      this.rollMode = game.settings.get("core", "rollMode");
+      this.rollMode =
+        game.settings.get("core", "rollMode") ??
+        game.settings.get("core", "messageMode");
       this.isAutomatic = rollData.isAutomatic;
       this.automaticFire = rollData.automaticFire;
       this.machineGunner = rollData.machineGunner;
@@ -23,7 +27,7 @@ export class CoriolisModifierDialog extends FormApplication {
     }
   
     static get defaultOptions() {
-      return mergeObject(super.defaultOptions, {
+      return foundry.utils.mergeObject(super.defaultOptions, {
         classes: ['form'],
         popOut: true,
         template: "systems/yzecoriolis/templates/dialog/coriolis-roll.html",

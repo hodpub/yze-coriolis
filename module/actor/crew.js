@@ -35,7 +35,7 @@ export function buildCrewOptionsArray() {
   // create options for all other ships in the world.
   for (let e of allShips) {
     let shipData = e;
-    if (!hasOwnerPermissionLevel(e.permission)) {
+    if (!hasOwnerPermissionLevel(e)) {
       continue;
     }
     options.push(

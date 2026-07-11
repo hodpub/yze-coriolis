@@ -27,8 +27,9 @@ export class yzecoriolisActor extends Actor {
     //setup default images for ships
     if (
       initData.type === "ship" &&
-      ((hasProperty(initData, "img") && initData.img === Actor.DEFAULT_ICON) ||
-        !hasProperty(initData, "img"))
+      ((foundry.utils.hasProperty(initData, "img") &&
+        initData.img === Actor.DEFAULT_ICON) ||
+        !foundry.utils.hasProperty(initData, "img"))
     ) {
       this.updateSource({ img: CONFIG.YZECORIOLIS.DEFAULT_SHIP_KEY_ART });
     }
@@ -36,7 +37,7 @@ export class yzecoriolisActor extends Actor {
     // we check the incoming data to make sure we aren't overriding a 'cloning'
     // operation.
     if (
-      !hasProperty(initData, "img") &&
+      !foundry.utils.hasProperty(initData, "img") &&
       (initData.type === "character" || initData.type === "npc")
     ) {
       this.updateSource({
@@ -1763,7 +1764,9 @@ export class yzecoriolisActor extends Actor {
       },
       title: title,
       template: template,
-      rollMode: game.settings.get("core", "rollMode"),
+      rollMode:
+        game.settings.get("core", "rollMode") ??
+        game.settings.get("core", "messageMode"),
       sound: CONFIG.sounds.dice,
       flags: {
         img: this.prototypeToken.randomImg
@@ -1777,7 +1780,7 @@ export class yzecoriolisActor extends Actor {
     if (this.token) {
       chatOptions.speaker.alias = this.token.name; // Use the token name instead of the actor name
       chatOptions.speaker.token = this.token._id;
-      chatOptions.speaker.scene = canvas.scene._id;
+      chatOptions.speaker.scene = canvas.scene.id;
       chatOptions.flags.img = this.token.texture.src; // Use the token image instead of the actor image
     } // If a linked actor - use the currently selected token's data if the actor id matches
     else {
