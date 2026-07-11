@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.4.0](https://github.com/SobranDM/yze-coriolis/compare/v4.3.0...v4.4.0) (2026-07-11)
+
+
+### Features
+
+* Foundry v14 compatibility ([2fca2bb](https://github.com/SobranDM/yze-coriolis/commit/2fca2bbdf616b3ac78f87b124c303ae8bd17e3dd))
+
+
+### Bug Fixes
+
+* remove unused formData and fix lint errors ([15da784](https://github.com/SobranDM/yze-coriolis/commit/15da78456c7fcc8f450b2558e941c370298fc6e8))
+
 ## [4.3.0](https://github.com/hodpub/yze-coriolis/compare/v4.2.0...v4.3.0) (2026-03-06)
 
 ### Features
