@@ -32,8 +32,6 @@ Hooks.on("renderJournalEntrySheet", (app, html, options) => {
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root) return;
   root.classList.add("coriolis-core");
-  root
-    .querySelector(".journal-entry-content")
-    ?.classList.add("coriolis-core");
+  root.querySelector(".journal-entry-content")?.classList.add("coriolis-core");
   root.querySelector(".entryContent")?.classList.add("coriolis-core");
 });

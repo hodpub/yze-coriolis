@@ -84,8 +84,9 @@ export class yzecoriolisShipSheet extends ActorSheet {
     const shipNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       baseData.actor.system.notes,
       {
-      async: true,
-    });
+        async: true,
+      }
+    );
     const sheetData = {
       editable: baseData.editable,
       owner: baseData.actor.isOwner,
@@ -258,7 +259,10 @@ export class yzecoriolisShipSheet extends ActorSheet {
     event.preventDefault();
     const targetButton = event.currentTarget;
     const type = targetButton.dataset.type;
-    const dataset = Object.assign({}, foundry.utils.deepClone(targetButton.dataset));
+    const dataset = Object.assign(
+      {},
+      foundry.utils.deepClone(targetButton.dataset)
+    );
     const name = dataset.defaultname;
     let imgPath = "";
     if (dataset.category === "weapon") {
@@ -282,7 +286,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
     // Finally, create the item!
     return this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
-  
+
   _onClickEditModule(event) {
     event.preventDefault();
     const targetButton = event.currentTarget;
@@ -303,7 +307,10 @@ export class yzecoriolisShipSheet extends ActorSheet {
     const targetButton = event.currentTarget;
     const type = targetButton.dataset.type;
     // Grab any data associated with this control.
-    const dataset = Object.assign({}, foundry.utils.deepClone(targetButton.dataset));
+    const dataset = Object.assign(
+      {},
+      foundry.utils.deepClone(targetButton.dataset)
+    );
     // Initialize a default name.
     const name = dataset.defaultname;
     // Prepare the item object.
@@ -474,16 +481,17 @@ export class yzecoriolisShipSheet extends ActorSheet {
     let crewMembersControlled = {};
     const isGM = game.user.isGM;
     for (let actor of game.actors.contents) {
-      if ((actor.type === "character" || actor.type === "npc")
-        && shipId === actor.system.bio.crewPosition.shipId)
-        {
-          crewMembers[actor._id] = actor;
-          if (hasOwnerPermissionLevel(actor)) {
-            crewMembersControlled[actor._id] = actor;
-          }
+      if (
+        (actor.type === "character" || actor.type === "npc") &&
+        shipId === actor.system.bio.crewPosition.shipId
+      ) {
+        crewMembers[actor._id] = actor;
+        if (hasOwnerPermissionLevel(actor)) {
+          crewMembersControlled[actor._id] = actor;
+        }
       }
     }
-    
+
     // Nothing can be fired without a crew.
     if (Object.keys(crewMembers).length < 1) {
       ui.notifications.error(
@@ -493,7 +501,7 @@ export class yzecoriolisShipSheet extends ActorSheet {
     }
     // Check if the user has permission to at least one of the crewmembers.
     // The GM can roll on any actor.
-    if (!isGM && (crewMembersControlled.length < 1)) {
+    if (!isGM && crewMembersControlled.length < 1) {
       ui.notifications.error(
         game.i18n.localize("YZECORIOLIS.InvalidCrewRollPermissionsAny")
       );
@@ -508,8 +516,8 @@ export class yzecoriolisShipSheet extends ActorSheet {
     }
 
     // Who is rolling?
-    let gunnerType = '';
-    let gunnerName = '';
+    let gunnerType = "";
+    let gunnerName = "";
     let gunnerAttribute = 0;
     let gunnerSkill = 0;
     let gunnerItemModifiers = {};
@@ -518,39 +526,43 @@ export class yzecoriolisShipSheet extends ActorSheet {
       const gunnerId = Object.keys(crewMembersControlled)[0];
       gunnerType = crewMembersControlled[gunnerId].type;
       gunnerName = crewMembersControlled[gunnerId].name;
-      gunnerAttribute = crewMembersControlled[gunnerId].system.attributes.agility.value;
-      gunnerSkill = crewMembersControlled[gunnerId].system.skills.rangedcombat.value;
-      gunnerItemModifiers = crewMembersControlled[gunnerId].system.itemModifiers.rangedcombat;
+      gunnerAttribute =
+        crewMembersControlled[gunnerId].system.attributes.agility.value;
+      gunnerSkill =
+        crewMembersControlled[gunnerId].system.skills.rangedcombat.value;
+      gunnerItemModifiers =
+        crewMembersControlled[gunnerId].system.itemModifiers.rangedcombat;
     } else if (Object.keys(crewMembersControlled).length > 1) {
       gunnerToChoose = true;
     }
-    
+
     // create a skill roll based off the previous input.
     const rollData = {
-      rollType: 'weapon',
+      rollType: "weapon",
       actorType: gunnerType,
-      skillKey: 'rangedcombat',
+      skillKey: "rangedcombat",
       skill: gunnerSkill,
-      attributeKey: 'agility',
+      attributeKey: "agility",
       attribute: gunnerAttribute,
       modifier: 0,
-      bonus: item.bonus
-        ? item.bonus
-        : 0,
-      rollTitle: game.i18n.localize("YZECORIOLIS.CrewSpotGunner") + " " + gunnerName + "\n- " + ship.name,
+      bonus: item.bonus ? item.bonus : 0,
+      rollTitle:
+        game.i18n.localize("YZECORIOLIS.CrewSpotGunner") +
+        " " +
+        gunnerName +
+        "\n- " +
+        ship.name,
       pushed: false,
       isAutomatic: false,
       isExplosive: false,
       blastPower: 0,
-      blastRadius: '',
+      blastRadius: "",
       damage: item.damage,
-      damageText: '',
+      damageText: "",
       range: item.range,
       crit: item.crit?.numericValue,
       critText: item.crit?.customValue,
-      features: item.special
-        ? Object.values(item.special).join(", ")
-        : "",
+      features: item.special ? Object.values(item.special).join(", ") : "",
       ship: ship.name,
       crewMembersControlled: crewMembersControlled,
       gunnerToChoose: gunnerToChoose,
@@ -568,7 +580,9 @@ export class yzecoriolisShipSheet extends ActorSheet {
     const ship = this.actor;
     const shipName = ship.name;
     const shipArmor = parseInt(ship.system.armor.value);
-    const characterName = game.user.character?.name ?? game.canvas.tokens.controlled[0]?.actor?.name;
+    const characterName =
+      game.user.character?.name ??
+      game.canvas.tokens.controlled[0]?.actor?.name;
 
     if (!characterName) {
       ui.notifications.error(
@@ -595,7 +609,12 @@ export class yzecoriolisShipSheet extends ActorSheet {
       modifier: 0,
       features: "",
       bonus: shipArmor,
-      rollTitle: characterName + "\n- " + shipName + " " + game.i18n.localize("YZECORIOLIS.Armor"),
+      rollTitle:
+        characterName +
+        "\n- " +
+        shipName +
+        " " +
+        game.i18n.localize("YZECORIOLIS.Armor"),
       pushed: false,
     };
     const chatOptions = ship._prepareChatRollOptions(
@@ -659,8 +678,8 @@ export class yzecoriolisShipSheet extends ActorSheet {
       if (!game.settings.get("yzecoriolis", "AlwaysShowFeatures")) {
         let props = $(`<div class="item-properties"></div>`);
         if (chatData.special) {
-          Object.keys(chatData.special).forEach(key=>{
-            props.append(`<span class="tag">${chatData.special[key]}</span>`)
+          Object.keys(chatData.special).forEach((key) => {
+            props.append(`<span class="tag">${chatData.special[key]}</span>`);
           });
         }
         $(div).find(".item-summary-wrapper").append(props);

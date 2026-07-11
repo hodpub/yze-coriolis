@@ -43,7 +43,11 @@ export const getActorDataById = (actorId) => {
  * @returns {boolean}
  */
 export const hasOwnerPermissionLevel = (docOrLevel) => {
-  if (docOrLevel && typeof docOrLevel === "object" && "testUserPermission" in docOrLevel) {
+  if (
+    docOrLevel &&
+    typeof docOrLevel === "object" &&
+    "testUserPermission" in docOrLevel
+  ) {
     return docOrLevel.testUserPermission(game.user, "OWNER");
   }
   if (docOrLevel && typeof docOrLevel === "object" && "isOwner" in docOrLevel) {

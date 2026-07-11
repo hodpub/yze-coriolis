@@ -52,9 +52,7 @@ export const migrateWorld = async function () {
   const packs = game.packs.filter((p) => {
     const isWorld =
       p.metadata.packageName === "world" || p.metadata.package === "world";
-    return (
-      isWorld && ["Actor", "Item", "Scene"].includes(p.metadata.type)
-    );
+    return isWorld && ["Actor", "Item", "Scene"].includes(p.metadata.type);
   });
   for (let p of packs) {
     await migrateCompendium(p);
@@ -191,10 +189,8 @@ export const migrateCompendium = async function (pack) {
     try {
       let updateData = null;
       if (documentType === "Item") updateData = migrateItemData(ent.toObject());
-      else if (documentType === "Actor")
-        updateData = migrateActorData(ent);
-      else if (documentType === "Scene")
-        updateData = migrateSceneData(ent);
+      else if (documentType === "Actor") updateData = migrateActorData(ent);
+      else if (documentType === "Scene") updateData = migrateSceneData(ent);
       if (!foundry.utils.isEmpty(updateData)) {
         updateData = foundry.utils.expandObject(updateData);
         updateData["_id"] = ent.id;

@@ -1,31 +1,31 @@
 /* Changes Radiobuttons to pictures für ship-gunner rolldialog */
 .yzecoriolis.rollModifierDialog.shipGunner {
-    [type=radio] { 
-        position: absolute;
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-      
-    [type=radio] + img {
-        cursor: pointer;
-        width: 6em;
-        height: 10em;
-        object-fit: cover;
-        object-position: top;
-        border-radius: 1em;
-        border: 0;
-        opacity: 0.5;
-    }
-    
-    [type=radio]:hover + img {
-        opacity: 1;
-        box-shadow: 0 0 1em red;
-        transition: 0.5s;
-    }
-    
-    [type=radio]:checked + img {
-        opacity: 1;
-        box-shadow: 0 0 1em red;
-    }
+  [type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  [type="radio"] + img {
+    cursor: pointer;
+    width: 6em;
+    height: 10em;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 1em;
+    border: 0;
+    opacity: 0.5;
+  }
+
+  [type="radio"]:hover + img {
+    opacity: 1;
+    box-shadow: 0 0 1em red;
+    transition: 0.5s;
+  }
+
+  [type="radio"]:checked + img {
+    opacity: 1;
+    box-shadow: 0 0 1em red;
+  }
 }

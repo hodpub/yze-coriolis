@@ -64,8 +64,8 @@ Hooks.on("renderCombatTracker", (app, html) => {
 
       initDiv.addEventListener("change", async (e) => {
         const inputElement = e.target;
-        const combatantId = inputElement.closest("[data-combatant-id]")
-          ?.dataset.combatantId;
+        const combatantId = inputElement.closest("[data-combatant-id]")?.dataset
+          .combatantId;
         if (!combatantId) return;
         await currentCombat.setInitiative(combatantId, inputElement.value);
       });

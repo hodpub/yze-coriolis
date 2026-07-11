@@ -1,79 +1,76 @@
 {
-    "id": "yzecoriolis",
-    "title": "Coriolis",
-    "description": "Coriolis System for Foundry VTT.",
-    "version": "4.3.0",
-    "compatibility": {
-        "minimum": "14",
-        "verified": "14",
-        "maximum": "14"
+  "id": "yzecoriolis",
+  "title": "Coriolis",
+  "description": "Coriolis System for Foundry VTT.",
+  "version": "4.3.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14",
+    "maximum": "14"
+  },
+  "authors": [
+    {
+      "name": "Winks"
     },
-    "authors": [
-        {
-            "name": "Winks"
-        },
-        {
-            "name": "CussaMitre",
-            "url": "https://hodpub.com"
-        }
-    ],
-    "esmodules": [
-        "module/yzecoriolis.js",
-        "module/hooks.js"
-    ],
-    "styles": [
-        { "src": "css/yzecoriolis.css" },
-        { "src": "css/yzecoriolismce.css" }
-    ],
-    "scripts": [],
-    "packs": [
-        {
-            "name": "ship_sheet_instructions",
-            "label": "Ship Sheet Instructions",
-            "path": "packs/ship-sheet-instructions",
-            "type": "JournalEntry"
-        }
-    ],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "lang/en.json"
-        },
-        {
-            "lang": "de",
-            "name": "Deutsch",
-            "path": "lang/de.json"
-        },
-        {
-            "lang": "es",
-            "name": "Spanish",
-            "path": "lang/es.json"
-        },
-        {
-            "lang": "sv",
-            "name": "Swedish",
-            "path": "lang/sv.json"
-        },
-        {
-            "lang": "pt-BR",
-            "name": "Brazilian Portuguese",
-            "path": "lang/pt-br.json"
-        },
-        {
-            "lang": "fr",
-            "name": "French",
-            "path": "lang/fr.json"
-        }
-    ],
-    "grid": {
-        "distance": 1,
-        "units": "m"
+    {
+      "name": "CussaMitre",
+      "url": "https://hodpub.com"
+    }
+  ],
+  "esmodules": ["module/yzecoriolis.js", "module/hooks.js"],
+  "styles": [
+    { "src": "css/yzecoriolis.css" },
+    { "src": "css/yzecoriolismce.css" }
+  ],
+  "scripts": [],
+  "packs": [
+    {
+      "name": "ship_sheet_instructions",
+      "label": "Ship Sheet Instructions",
+      "path": "packs/ship-sheet-instructions",
+      "type": "JournalEntry"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
     },
-    "primaryTokenAttribute": "hitPoints",
-    "secondaryTokenAttribute": "mindPoints",
-    "url": "",
-    "protected": false,
-    "manifest": "https://github.com/hodpub/yze-coriolis/releases/latest/download/system.json",
-    "download": "https://github.com/hodpub/yze-coriolis/releases/download/v4.3.0/coriolis.zip"
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    },
+    {
+      "lang": "es",
+      "name": "Spanish",
+      "path": "lang/es.json"
+    },
+    {
+      "lang": "sv",
+      "name": "Swedish",
+      "path": "lang/sv.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Brazilian Portuguese",
+      "path": "lang/pt-br.json"
+    },
+    {
+      "lang": "fr",
+      "name": "French",
+      "path": "lang/fr.json"
+    }
+  ],
+  "grid": {
+    "distance": 1,
+    "units": "m"
+  },
+  "primaryTokenAttribute": "hitPoints",
+  "secondaryTokenAttribute": "mindPoints",
+  "url": "",
+  "protected": false,
+  "manifest": "https://github.com/hodpub/yze-coriolis/releases/latest/download/system.json",
+  "download": "https://github.com/hodpub/yze-coriolis/releases/download/v4.3.0/coriolis.zip"
 }

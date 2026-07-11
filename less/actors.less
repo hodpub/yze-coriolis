@@ -3,7 +3,6 @@
 @import "./utils/databar.less";
 
 .yzecoriolis.sheet.actor.character {
-
   /*
     Background & Container
     */
@@ -47,7 +46,6 @@
 }
 
 .yzecoriolis.sheet.actor {
-
   /*
     mixins
     */
@@ -166,10 +164,12 @@
   }
 
   .gradient-overlay {
-    background: linear-gradient(180deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.635714) 28.12%,
-        @colorBlack 72.92%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.635714) 28.12%,
+      @colorBlack 72.92%
+    );
     grid-column-start: 1;
     grid-column-end: 2;
     grid-row-start: 2;
@@ -178,10 +178,12 @@
   }
 
   .always-visible-stats {
-    background: linear-gradient(180deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0.635714) 28.12%,
-        @colorBlack 72.92%);
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.635714) 28.12%,
+      @colorBlack 72.92%
+    );
 
     grid-column-start: 1;
     grid-column-end: 2;
@@ -1157,7 +1159,8 @@
           padding: 0px 35px 0px 10px;
 
           border: none;
-          background: url("icons/drop-down-arrow.svg") 96% / 15% no-repeat @colorBlueTransparent;
+          background: url("icons/drop-down-arrow.svg") 96% / 15% no-repeat
+            @colorBlueTransparent;
           background-position: right 0.7em top 50%;
 
           &:focus {
@@ -1379,21 +1382,21 @@
         align-items: center;
         margin-top: 20px;
       }
-      
+
       .module-category-header:first-of-type {
         margin-top: 0px;
       }
-      
+
       .module-category-name {
         font-size: 14px;
         margin: 0px 0px 0px 5px;
         text-transform: uppercase;
       }
-      
+
       .module-category-name:first-of-type {
         flex: 2.5 0 0;
       }
-      
+
       .module-controls {
         text-transform: uppercase;
         flex: 0 0 100px;
@@ -1403,48 +1406,50 @@
         display: flex;
         justify-content: flex-end;
       }
-      
+
       .module-control-widget {
         color: #7182be;
         flex-basis: 20px;
-        transition: color 275ms ease, transform 275ms ease, text-shadow 275ms ease;
+        transition: color 275ms ease, transform 275ms ease,
+          text-shadow 275ms ease;
       }
-      
+
       .module-control-widget a:hover {
         text-shadow: none;
       }
-      
+
       .module-control-widget:hover {
         text-shadow: 0 0 5px #ff4500;
         color: white;
         transform: scale(1.05);
       }
-      
+
       .module-control-add-widget {
         color: #7182be;
         flex-basis: 20px;
-        transition: color 275ms ease, transform 275ms ease, text-shadow 275ms ease;
+        transition: color 275ms ease, transform 275ms ease,
+          text-shadow 275ms ease;
         color: #9fb0ed;
         flex-basis: 100px;
       }
-      
+
       .module-control-add-widget a:hover {
         text-shadow: none;
       }
-      
+
       .module-control-add-widget:hover {
         text-shadow: 0 0 5px #ff4500;
         color: white;
         transform: scale(1.05);
       }
-      
+
       .module {
         align-items: center;
         font-family: "Cairo";
         color: white;
         margin-bottom: 2px;
       }
-      
+
       .module-bg {
         background-color: rgba(19, 27, 53, 0.45);
         border-radius: 3px;
@@ -1452,7 +1457,7 @@
         padding-right: 5px;
         flex: 0 0 100%;
       }
-      
+
       .module-bg-weapon {
         background-color: rgba(19, 27, 53, 0.45);
         border-radius: 3px;
@@ -1469,17 +1474,17 @@
           background-color: rgba(19, 27, 53, 0.45);
         }
       }
-      
+
       .module-bg:hover {
         animation: flicker 1.2s;
         animation-fill-mode: forwards;
       }
-      
+
       .module-bg-weapon:hover {
         animation: flicker 1.2s;
         animation-fill-mode: forwards;
       }
-      
+
       .module-name {
         font-family: "Cairo-SemiBold";
         color: white;
@@ -1488,30 +1493,30 @@
         cursor: pointer;
         transition: transform 275ms ease;
       }
-      
+
       .module-name:first-of-type {
         flex: 2.5 0 0;
       }
-      
+
       .module-name:hover {
         transform: translateX(5px);
       }
-      
+
       .module-row-data {
         font-family: "Cairo";
         color: white;
         font-size: 14px;
         text-align: center;
       }
-      
+
       .item-summary-wrapper {
         flex: 0 0 850px;
       }
-      
+
       .expanded {
         height: auto;
       }
-    
+
       .weapon-img-container {
         height: 42px;
         flex: 0 0 42px;
@@ -1528,17 +1533,15 @@
       .weapon-img-container.rollable {
         transition: background-image 275ms ease, transform 275ms ease;
       }
-      
+
       .weapon-img-container.rollable:hover {
         background-image: url("icons/rolling-dices-orange.svg") !important;
         transform: scale(1.05);
       }
-    
     }
   }
 
   .modules-panel {
-
     .toggle-ship-module-button {
       border: none;
       border-radius: 3px;
@@ -1570,7 +1573,7 @@
       flex: 1;
       height: 35px;
     }
-    
+
     .item-properties .tag {
       font-family: "Cairo";
       color: white;

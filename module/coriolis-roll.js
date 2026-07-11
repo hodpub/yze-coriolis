@@ -39,41 +39,41 @@ export async function coriolisRoll(chatOptions, rollData) {
  * @param  {} origRoll
  */
 export async function coriolisPushRoll(chatMessage, origRollData, origRoll) {
-    origRollData.pushed = true;
-    const Die = foundry.dice.terms.Die;
-    for (let part of origRoll.dice) {
-      for (let r of part.results) {
-        if (r.result !== CONFIG.YZECORIOLIS.maxRoll) {
-          const newDie = new Die({ faces: 6 });
-          const rolled = await newDie.roll();
-          r.result = rolled.result;
-        }
-      }
-
-      // do not apply the prayer bonus on automatic fire rolls
-      let bonus = origRollData.prayerBonus + origRollData.prayerModifiersBonus;
-      if (!part.modifiers.includes("x>1")) {
-        part.number = part.number + bonus;
-        for (let i = 0; i < bonus; i++) {
-          const newDie = new Die({ faces: 6 });
-          const rolled = await newDie.roll();
-          part.results.push({ result: rolled.result, active: true });
-        }
+  origRollData.pushed = true;
+  const Die = foundry.dice.terms.Die;
+  for (let part of origRoll.dice) {
+    for (let r of part.results) {
+      if (r.result !== CONFIG.YZECORIOLIS.maxRoll) {
+        const newDie = new Die({ faces: 6 });
+        const rolled = await newDie.roll();
+        r.result = rolled.result;
       }
     }
 
-    const messageMode =
-      chatMessage.getFlag("yzecoriolis", "messageMode") ??
-      foundry.dice.Roll._mapLegacyRollMode(chatMessage.rollMode) ??
-      game.settings.get("core", "messageMode");
-    await showDiceSoNice(origRoll, messageMode);
-    const result = evaluateCoriolisRoll(origRollData, origRoll);
-    await updateChatMessage(chatMessage, result, origRoll);
-    if (origRollData.actorType === "npc") {
-      await spendDarknessPoints(1);
-    } else {
-      await addDarknessPoints(1);
+    // do not apply the prayer bonus on automatic fire rolls
+    let bonus = origRollData.prayerBonus + origRollData.prayerModifiersBonus;
+    if (!part.modifiers.includes("x>1")) {
+      part.number = part.number + bonus;
+      for (let i = 0; i < bonus; i++) {
+        const newDie = new Die({ faces: 6 });
+        const rolled = await newDie.roll();
+        part.results.push({ result: rolled.result, active: true });
+      }
     }
+  }
+
+  const messageMode =
+    chatMessage.getFlag("yzecoriolis", "messageMode") ??
+    foundry.dice.Roll._mapLegacyRollMode(chatMessage.rollMode) ??
+    game.settings.get("core", "messageMode");
+  await showDiceSoNice(origRoll, messageMode);
+  const result = evaluateCoriolisRoll(origRollData, origRoll);
+  await updateChatMessage(chatMessage, result, origRoll);
+  if (origRollData.actorType === "npc") {
+    await spendDarknessPoints(1);
+  } else {
+    await addDarknessPoints(1);
+  }
 }
 
 /**
@@ -156,9 +156,13 @@ function getTotalDice(rollData) {
       return attributeValue + modifier + itemModifierBonus;
     case "weapon":
       if (rollData.automaticFire) {
-        return attributeValue + skillValue + bonus + modifier + itemModifierBonus - 2;
+        return (
+          attributeValue + skillValue + bonus + modifier + itemModifierBonus - 2
+        );
       } else {
-        return attributeValue + skillValue + bonus + modifier + itemModifierBonus;
+        return (
+          attributeValue + skillValue + bonus + modifier + itemModifierBonus
+        );
       }
     case "armor":
       return bonus + modifier + itemModifierBonus;
@@ -222,11 +226,7 @@ async function showChatMessage(chatMsgOptions, resultData, roll) {
   return msg;
 }
 
-async function updateChatMessage(
-  chatMessage,
-  resultData,
-  origRoll
-) {
+async function updateChatMessage(chatMessage, resultData, origRoll) {
   let tooltip = await foundry.applications.handlebars.renderTemplate(
     "systems/yzecoriolis/templates/sidebar/dice-results.html",
     getTooltipData(resultData, origRoll)
@@ -415,25 +415,31 @@ function getRollModifiersChecked(rollData) {
   let modifiersCheckedList = [];
   for (const modifier in rollData.itemModifiers) {
     if (rollData.itemModifiers[modifier].checked) {
-      let value = rollData.itemModifiers[modifier].value > 0
-        ? '+' + rollData.itemModifiers[modifier].value
-        : rollData.itemModifiers[modifier].value;
-      modifiersCheckedList.push(rollData.itemModifiers[modifier].name + ' (' + value + ')');
+      let value =
+        rollData.itemModifiers[modifier].value > 0
+          ? "+" + rollData.itemModifiers[modifier].value
+          : rollData.itemModifiers[modifier].value;
+      modifiersCheckedList.push(
+        rollData.itemModifiers[modifier].name + " (" + value + ")"
+      );
     }
   }
-  const modifiersChecked = modifiersCheckedList.join("\n")
+  const modifiersChecked = modifiersCheckedList.join("\n");
   return modifiersChecked;
 }
 
 function getPrayerModifiersChecked(rollData) {
   let modifiersCheckedList = [];
   for (const modifier in rollData.prayerModifiers) {
-    let value = rollData.prayerModifiers[modifier].value > 0
-      ? '+' + rollData.prayerModifiers[modifier].value
-      : rollData.prayerModifiers[modifier].value;
-    modifiersCheckedList.push(`+ ${rollData.prayerModifiers[modifier].name} (${value})`);
+    let value =
+      rollData.prayerModifiers[modifier].value > 0
+        ? "+" + rollData.prayerModifiers[modifier].value
+        : rollData.prayerModifiers[modifier].value;
+    modifiersCheckedList.push(
+      `+ ${rollData.prayerModifiers[modifier].name} (${value})`
+    );
   }
-  const modifiersChecked = modifiersCheckedList.join(", ")
+  const modifiersChecked = modifiersCheckedList.join(", ");
   return modifiersChecked;
 }
 
@@ -456,9 +462,11 @@ export async function coriolisChatListeners(html) {
         );
         return;
       }
-      new CoriolisModifierDialog(message, results.rollData, originalRoll).render(
-        true
-      );
+      new CoriolisModifierDialog(
+        message,
+        results.rollData,
+        originalRoll
+      ).render(true);
     });
   });
 }
@@ -485,7 +493,9 @@ async function showDiceSoNice(roll, messageMode) {
         break;
       }
       case "public": {
-        whisper = game.users.filter((user) => user.active).map((user) => user.id);
+        whisper = game.users
+          .filter((user) => user.active)
+          .map((user) => user.id);
         break;
       }
       case "self": {

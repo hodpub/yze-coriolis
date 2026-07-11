@@ -58,16 +58,26 @@ Hooks.once("init", async function () {
 
   // Register sheet application classes
   DocumentSheetConfig.unregisterSheet(Actor, "core", ActorSheet);
-  DocumentSheetConfig.registerSheet(Actor, "yzecoriolis", yzecoriolisActorSheet, {
-    types: ["character", "npc"],
-    makeDefault: true,
-    label: "YZECORIOLIS.SheetClassCharacter",
-  });
-  DocumentSheetConfig.registerSheet(Actor, "yzecoriolis", yzecoriolisShipSheet, {
-    types: ["ship"],
-    makeDefault: true,
-    label: "YZECORIOLIS.SheetClassShip",
-  });
+  DocumentSheetConfig.registerSheet(
+    Actor,
+    "yzecoriolis",
+    yzecoriolisActorSheet,
+    {
+      types: ["character", "npc"],
+      makeDefault: true,
+      label: "YZECORIOLIS.SheetClassCharacter",
+    }
+  );
+  DocumentSheetConfig.registerSheet(
+    Actor,
+    "yzecoriolis",
+    yzecoriolisShipSheet,
+    {
+      types: ["ship"],
+      makeDefault: true,
+      label: "YZECORIOLIS.SheetClassShip",
+    }
+  );
 
   DocumentSheetConfig.unregisterSheet(Item, "core", ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "yzecoriolis", yzecoriolisItemSheet, {
@@ -424,7 +434,10 @@ Hooks.once("ready", async function () {
   const COMPATIBLE_MIGRATION_VERSION = "1.4.7";
 
   let needMigration =
-    foundry.utils.isNewerVersion(currentVersion, NEEDS_MIGRATION_AFTER_VERSION) &&
+    foundry.utils.isNewerVersion(
+      currentVersion,
+      NEEDS_MIGRATION_AFTER_VERSION
+    ) &&
     foundry.utils.isNewerVersion(
       NEEDS_MIGRATION_AFTER_VERSION,
       lastMigratedToVersion
