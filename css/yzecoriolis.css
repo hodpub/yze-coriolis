@@ -53,42 +53,47 @@
   border: 1px solid red;
 }
 @font-face {
-  font-family: 'Martel';
+  font-family: "Martel";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/martel/v12/PN_xRfK9oXHga0XtYQ.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/martel/v12/PN_xRfK9oXHga0XtYQ.ttf)
+    format("truetype");
 }
 @font-face {
-  font-family: 'Martel';
+  font-family: "Martel";
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/martel/v12/PN_yRfK9oXHga0XVwe4ahQ.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/martel/v12/PN_yRfK9oXHga0XVwe4ahQ.ttf)
+    format("truetype");
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 300;
   font-stretch: normal;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabWmT.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabWmT.ttf)
+    format("truetype");
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-stretch: normal;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmT.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbWmT.ttf)
+    format("truetype");
 }
 @font-face {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-stretch: normal;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bWmT.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/roboto/v49/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWub2bWmT.ttf)
+    format("truetype");
 }
 .resource-label {
   font-weight: bold;
@@ -775,7 +780,8 @@ amending some classes to help official modules work in v13
   font-size: 18px;
   text-align: right;
 }
-.yzecoriolis.sheet.actor input[type="number"].right-aligned-number-input::placeholder {
+.yzecoriolis.sheet.actor
+  input[type="number"].right-aligned-number-input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #7b7c4c;
 }
@@ -834,7 +840,8 @@ amending some classes to help official modules work in v13
     */
 }
 .yzecoriolis.sheet.actor.character .window-content {
-  background: linear-gradient(90deg, #000000 30.35%, rgba(0, 0, 0, 0) 100%), url("images/char-sheet-bg.jpg");
+  background: linear-gradient(90deg, #000000 30.35%, rgba(0, 0, 0, 0) 100%),
+    url("images/char-sheet-bg.jpg");
 }
 .yzecoriolis.sheet.actor.ship .window-content {
   background: url("images/ship-sheet-bg.jpg");
@@ -952,7 +959,12 @@ amending some classes to help official modules work in v13
   border-radius: 10px;
 }
 .yzecoriolis.sheet.actor .gradient-overlay {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.635714) 28.12%, #000000 72.92%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.635714) 28.12%,
+    #000000 72.92%
+  );
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 2;
@@ -960,7 +972,12 @@ amending some classes to help official modules work in v13
   z-index: 2;
 }
 .yzecoriolis.sheet.actor .always-visible-stats {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.635714) 28.12%, #000000 72.92%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.635714) 28.12%,
+    #000000 72.92%
+  );
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 3;
@@ -984,13 +1001,25 @@ amending some classes to help official modules work in v13
   margin-bottom: 5px;
   align-items: center;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .stat-label {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .stat-label {
   flex: 0 0 120px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .capitalize {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .capitalize {
   text-transform: capitalize;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .number {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .number {
   color: #fdff9d;
   grid-column-start: 1;
   grid-column-end: 2;
@@ -998,14 +1027,23 @@ amending some classes to help official modules work in v13
   grid-row-end: 2;
   text-align: center;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .number .input-value {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .number
+  .input-value {
   font-family: "Cairo";
   color: white;
   font-size: 17px;
   color: #fdff9d;
   height: 18px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar {
   padding: 0px 5px 0px 5px;
   border: 1px solid #a4a4a4;
   border-radius: 5px;
@@ -1014,13 +1052,28 @@ amending some classes to help official modules work in v13
   justify-content: space-between;
   align-items: center;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .bar-rounded {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .bar-rounded {
   border-radius: 2px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .bar-pill {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .bar-pill {
   border-radius: 40px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .bar-segment {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .bar-segment {
   box-sizing: border-box;
   flex: 1 1 10px;
   height: 17px;
@@ -1028,25 +1081,59 @@ amending some classes to help official modules work in v13
   background-color: #000000;
   transition: background-color 275ms ease, border 275ms ease;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .hover-to-decrease {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .hover-to-decrease {
   background-color: #44482c !important;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .hover-to-increase {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .hover-to-increase {
   border: 1px solid #b1c343;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .bar-segment.on {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .bar-segment.on {
   background-color: #b1c343;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .bar-segment.on:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .bar-segment.on:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .bar-segment.off {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .bar-segment.off {
   background-color: #000000;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .radiation-bar .bar-segment.off:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .radiation-bar
+  .bar-segment.off:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar {
   padding: 0px 5px 0px 5px;
   border: 1px solid #a4a4a4;
   border-radius: 5px;
@@ -1055,13 +1142,28 @@ amending some classes to help official modules work in v13
   justify-content: space-between;
   align-items: center;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .bar-rounded {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .bar-rounded {
   border-radius: 2px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .bar-pill {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .bar-pill {
   border-radius: 40px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .bar-segment {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .bar-segment {
   box-sizing: border-box;
   flex: 1 1 10px;
   height: 17px;
@@ -1069,25 +1171,59 @@ amending some classes to help official modules work in v13
   background-color: #000000;
   transition: background-color 275ms ease, border 275ms ease;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .hover-to-decrease {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .hover-to-decrease {
   background-color: #c7b4ee !important;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .hover-to-increase {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .hover-to-increase {
   border: 1px solid #603fa7;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .bar-segment.on {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .bar-segment.on {
   background-color: #603fa7;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .bar-segment.on:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .bar-segment.on:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .bar-segment.off {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .bar-segment.off {
   background-color: #000000;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .xp-bar .bar-segment.off:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .xp-bar
+  .bar-segment.off:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar {
   padding: 0px 5px 0px 5px;
   border: 1px solid #a4a4a4;
   border-radius: 5px;
@@ -1096,13 +1232,28 @@ amending some classes to help official modules work in v13
   justify-content: space-between;
   align-items: center;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .bar-rounded {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .bar-rounded {
   border-radius: 2px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .bar-pill {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .bar-pill {
   border-radius: 40px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .bar-segment {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .bar-segment {
   box-sizing: border-box;
   flex: 1 1 10px;
   height: 17px;
@@ -1110,25 +1261,59 @@ amending some classes to help official modules work in v13
   background-color: #000000;
   transition: background-color 275ms ease, border 275ms ease;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .hover-to-decrease {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .hover-to-decrease {
   background-color: #732d3e !important;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .hover-to-increase {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .hover-to-increase {
   border: 1px solid #cf4264;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .bar-segment.on {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .bar-segment.on {
   background-color: #cf4264;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .bar-segment.on:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .bar-segment.on:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .bar-segment.off {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .bar-segment.off {
   background-color: #000000;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .rep-bar .bar-segment.off:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .rep-bar
+  .bar-segment.off:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar {
   padding: 0px 5px 0px 5px;
   border: 1px solid #a4a4a4;
   border-radius: 5px;
@@ -1137,13 +1322,28 @@ amending some classes to help official modules work in v13
   justify-content: space-between;
   align-items: center;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .bar-rounded {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .bar-rounded {
   border-radius: 2px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .bar-pill {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .bar-pill {
   border-radius: 40px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .bar-segment {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .bar-segment {
   box-sizing: border-box;
   flex: 1 1 10px;
   height: 17px;
@@ -1151,25 +1351,59 @@ amending some classes to help official modules work in v13
   background-color: #000000;
   transition: background-color 275ms ease, border 275ms ease;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .hover-to-decrease {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .hover-to-decrease {
   background-color: #5c0000 !important;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .hover-to-increase {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .hover-to-increase {
   border: 1px solid #125c00;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .bar-segment.on {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .bar-segment.on {
   background-color: #125c00;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .bar-segment.on:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .bar-segment.on:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .bar-segment.off {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .bar-segment.off {
   background-color: #000000;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .hp-bar .bar-segment.off:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .hp-bar
+  .bar-segment.off:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar {
   padding: 0px 5px 0px 5px;
   border: 1px solid #a4a4a4;
   border-radius: 5px;
@@ -1178,13 +1412,28 @@ amending some classes to help official modules work in v13
   justify-content: space-between;
   align-items: center;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .bar-rounded {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .bar-rounded {
   border-radius: 2px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .bar-pill {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .bar-pill {
   border-radius: 40px;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .bar-segment {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .bar-segment {
   box-sizing: border-box;
   flex: 1 1 10px;
   height: 17px;
@@ -1192,22 +1441,52 @@ amending some classes to help official modules work in v13
   background-color: #000000;
   transition: background-color 275ms ease, border 275ms ease;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .hover-to-decrease {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .hover-to-decrease {
   background-color: #081f43 !important;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .hover-to-increase {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .hover-to-increase {
   border: 1px solid #3f82a7;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .bar-segment.on {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .bar-segment.on {
   background-color: #3f82a7;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .bar-segment.on:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .bar-segment.on:hover {
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .bar-segment.off {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .bar-segment.off {
   background-color: #000000;
 }
-.yzecoriolis.sheet.actor .always-visible-stats .perma-stats-list .entry .mind-bar .bar-segment.off:hover {
+.yzecoriolis.sheet.actor
+  .always-visible-stats
+  .perma-stats-list
+  .entry
+  .mind-bar
+  .bar-segment.off:hover {
   transform: scale(1.05);
 }
 .yzecoriolis.sheet.actor .char-content-wrapper {
@@ -1421,7 +1700,11 @@ amending some classes to help official modules work in v13
   text-shadow: none;
   color: #ffa903;
 }
-.yzecoriolis.sheet.actor .sheet-body .item-summary-wrapper a.entity-link:hover i,
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .item-summary-wrapper
+  a.entity-link:hover
+  i,
 .yzecoriolis.sheet.actor .sheet-body .charnotes a.entity-link:hover i {
   color: #ffa903;
 }
@@ -1529,7 +1812,11 @@ amending some classes to help official modules work in v13
   font-weight: bold;
   line-height: 60px;
 }
-.yzecoriolis.sheet.actor .sheet-body .attribute-list .attr-num-display .attr-input {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .attribute-list
+  .attr-num-display
+  .attr-input {
   font-weight: bold;
   font-size: 48px;
   height: 50px;
@@ -1583,7 +1870,12 @@ amending some classes to help official modules work in v13
 .yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .rollable:hover {
   text-shadow: 0 0 5px #ff4500;
 }
-.yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .rollable:hover .skill-image {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .skills-list-group
+  .skill
+  .rollable:hover
+  .skill-image {
   background-image: url("icons/rolling-dices.svg");
   background-size: 30px;
 }
@@ -1606,7 +1898,11 @@ amending some classes to help official modules work in v13
   flex-basis: 30px;
   margin-right: 5px;
 }
-.yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .attr-tag-helper {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .skills-list-group
+  .skill
+  .attr-tag-helper {
   height: 30px;
   flex-basis: 30px;
   background-size: 25px;
@@ -1622,7 +1918,11 @@ amending some classes to help official modules work in v13
   background-position: center center;
   background-clip: padding-box;
 }
-.yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .bg-skill-strength {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .skills-list-group
+  .skill
+  .bg-skill-strength {
   height: 30px;
   flex-basis: 30px;
   background-size: 25px;
@@ -1633,7 +1933,11 @@ amending some classes to help official modules work in v13
   background-clip: padding-box;
   background-size: 20px;
 }
-.yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .bg-skill-empathy {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .skills-list-group
+  .skill
+  .bg-skill-empathy {
   height: 30px;
   flex-basis: 30px;
   background-size: 25px;
@@ -1643,7 +1947,11 @@ amending some classes to help official modules work in v13
   background-position: center center;
   background-clip: padding-box;
 }
-.yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .bg-skill-agility {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .skills-list-group
+  .skill
+  .bg-skill-agility {
   height: 30px;
   flex-basis: 30px;
   background-size: 25px;
@@ -1653,7 +1961,11 @@ amending some classes to help official modules work in v13
   background-position: center center;
   background-clip: padding-box;
 }
-.yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .skill-value-display {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .skills-list-group
+  .skill
+  .skill-value-display {
   flex-basis: 45px;
 }
 .yzecoriolis.sheet.actor .sheet-body .skills-list-group .skill .skill-input {
@@ -1694,7 +2006,10 @@ amending some classes to help official modules work in v13
   height: auto;
   color: white;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .critical-injuries-bg {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .critical-injuries-bg {
   background-color: rgba(19, 27, 53, 0.45);
   border-radius: 3px;
   padding-left: 5px;
@@ -1709,11 +2024,17 @@ amending some classes to help official modules work in v13
     background-color: rgba(19, 27, 53, 0.45);
   }
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .critical-injuries-bg:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .critical-injuries-bg:hover {
   animation: flicker 1.2s;
   animation-fill-mode: forwards;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .critical-injuries-name {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .critical-injuries-name {
   font-family: "Cairo-SemiBold";
   color: white;
   color: #ffa903;
@@ -1721,10 +2042,16 @@ amending some classes to help official modules work in v13
   cursor: pointer;
   transition: transform 275ms ease;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .critical-injuries-name:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .critical-injuries-name:hover {
   transform: translateX(5px);
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .crit-add-controls {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .crit-add-controls {
   font-family: "Cairo";
   color: white;
   font-size: 14px;
@@ -1741,20 +2068,33 @@ amending some classes to help official modules work in v13
   margin-right: 5px;
   margin-top: 5px;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .crit-control-widget {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .crit-control-widget {
   flex-basis: 20px;
   text-align: right;
   transition: color 275ms ease, transform 275ms ease, text-shadow 275ms ease;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .crit-control-widget a:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .crit-control-widget
+  a:hover {
   text-shadow: none;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .crit-control-widget:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .crit-control-widget:hover {
   text-shadow: 0 0 5px #ff4500;
   color: white;
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .crit-control-widget.item-delete {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .crit-control-widget.item-delete {
   padding-left: 15px;
 }
 .yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .injury-display {
@@ -1764,15 +2104,26 @@ amending some classes to help official modules work in v13
   font-weight: bold;
   color: #ffa903;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .injury-description {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .injury-description {
   color: #9fb0ed;
   flex: 0 0 400px;
   width: 400px;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .injury-description span {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .injury-description
+  span {
   white-space: nowrap !important;
 }
-.yzecoriolis.sheet.actor .sheet-body .critical-injuries-list .injury-description p {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .critical-injuries-list
+  .injury-description
+  p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1819,7 +2170,10 @@ amending some classes to help official modules work in v13
   align-items: center;
   margin-top: 20px;
 }
-.yzecoriolis.sheet.actor .sheet-body .talent-list .talent-category-header:first-of-type {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .talent-list
+  .talent-category-header:first-of-type {
   margin-top: 0px;
 }
 .yzecoriolis.sheet.actor .sheet-body .talent-list .talent-category-name {
@@ -1841,7 +2195,11 @@ amending some classes to help official modules work in v13
   flex-basis: 20px;
   transition: color 275ms ease, transform 275ms ease, text-shadow 275ms ease;
 }
-.yzecoriolis.sheet.actor .sheet-body .talent-list .talent-control-widget a:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .talent-list
+  .talent-control-widget
+  a:hover {
   text-shadow: none;
 }
 .yzecoriolis.sheet.actor .sheet-body .talent-list .talent-control-widget:hover {
@@ -1849,7 +2207,10 @@ amending some classes to help official modules work in v13
   color: white;
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .sheet-body .talent-list .talent-control-widget.item-delete {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .talent-list
+  .talent-control-widget.item-delete {
   padding-left: 15px;
 }
 .yzecoriolis.sheet.actor .sheet-body .talent-list .talent-control-add-widget {
@@ -1859,10 +2220,17 @@ amending some classes to help official modules work in v13
   color: #9fb0ed;
   flex-basis: 100px;
 }
-.yzecoriolis.sheet.actor .sheet-body .talent-list .talent-control-add-widget a:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .talent-list
+  .talent-control-add-widget
+  a:hover {
   text-shadow: none;
 }
-.yzecoriolis.sheet.actor .sheet-body .talent-list .talent-control-add-widget:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .talent-list
+  .talent-control-add-widget:hover {
   text-shadow: 0 0 5px #ff4500;
   color: white;
   transform: scale(1.05);
@@ -1935,7 +2303,10 @@ amending some classes to help official modules work in v13
   align-items: center;
   margin-top: 20px;
 }
-.yzecoriolis.sheet.actor .sheet-body .gear-list .gear-category-header:first-of-type {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .gear-list
+  .gear-category-header:first-of-type {
   margin-top: 0px;
 }
 .yzecoriolis.sheet.actor .sheet-body .gear-list .gear-category-name {
@@ -1971,7 +2342,10 @@ amending some classes to help official modules work in v13
   color: white;
   transform: scale(1.05);
 }
-.yzecoriolis.sheet.actor .sheet-body .gear-list .gear-control-widget.item-delete {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .gear-list
+  .gear-control-widget.item-delete {
   padding-left: 15px;
 }
 .yzecoriolis.sheet.actor .sheet-body .gear-list .gear-control-add-widget {
@@ -1981,7 +2355,11 @@ amending some classes to help official modules work in v13
   color: #9fb0ed;
   flex-basis: 100px;
 }
-.yzecoriolis.sheet.actor .sheet-body .gear-list .gear-control-add-widget a:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .gear-list
+  .gear-control-add-widget
+  a:hover {
   text-shadow: none;
 }
 .yzecoriolis.sheet.actor .sheet-body .gear-list .gear-control-add-widget:hover {
@@ -2011,7 +2389,11 @@ amending some classes to help official modules work in v13
 .yzecoriolis.sheet.actor .sheet-body .gear-list .gear-name .expandable-info {
   transition: transform 275ms ease;
 }
-.yzecoriolis.sheet.actor .sheet-body .gear-list .gear-name .expandable-info:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .gear-list
+  .gear-name
+  .expandable-info:hover {
   transform: translateX(5px);
 }
 .yzecoriolis.sheet.actor .sheet-body .gear-list .gear-row-data {
@@ -2086,7 +2468,10 @@ amending some classes to help official modules work in v13
 .yzecoriolis.sheet.actor .sheet-body .gear-list .gear-img-container.rollable {
   transition: background-image 275ms ease, transform 275ms ease;
 }
-.yzecoriolis.sheet.actor .sheet-body .gear-list .gear-img-container.rollable:hover {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .gear-list
+  .gear-img-container.rollable:hover {
   background-image: url("icons/rolling-dices-orange.svg") !important;
   transform: scale(1.05);
 }
@@ -2112,7 +2497,10 @@ amending some classes to help official modules work in v13
   background-color: #3f82a7;
   border-radius: 5px 0px 0px 5px;
 }
-.yzecoriolis.sheet.actor .sheet-body .encumbrance-bar .encumbrance-fill.encumbered {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .encumbrance-bar
+  .encumbrance-fill.encumbered {
   border-radius: 5px;
   background-color: #ff4500;
 }
@@ -2146,7 +2534,10 @@ amending some classes to help official modules work in v13
   margin-top: 20px;
   text-align: center;
 }
-.yzecoriolis.sheet.actor .sheet-body .bio-stats .bio-category-header:first-of-type {
+.yzecoriolis.sheet.actor
+  .sheet-body
+  .bio-stats
+  .bio-category-header:first-of-type {
   margin-top: 0px;
 }
 .yzecoriolis.sheet.actor .sheet-body .bio-stats .bio-category-name {
@@ -2220,7 +2611,8 @@ amending some classes to help official modules work in v13
   height: 25px;
   padding: 0px 35px 0px 10px;
   border: none;
-  background: url("icons/drop-down-arrow.svg") 96% / 15% no-repeat rgba(113, 130, 190, 0.44);
+  background: url("icons/drop-down-arrow.svg") 96% / 15% no-repeat
+    rgba(113, 130, 190, 0.44);
   background-position: right 0.7em top 50%;
 }
 .yzecoriolis.sheet.actor .sheet-body .bio-stats .bio-block select:focus {
@@ -2423,7 +2815,8 @@ amending some classes to help official modules work in v13
 .yzecoriolis.sheet.actor .ship .crew-card .crew-roll-number-hover {
   transform: translateY(-3px) scale(1.1);
   color: #041126;
-  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white,
+    1px 1px 0 white;
 }
 .yzecoriolis.sheet.actor .ship .crew-card .roll-glow {
   position: relative;
@@ -2480,7 +2873,10 @@ amending some classes to help official modules work in v13
   align-items: center;
   margin-top: 20px;
 }
-.yzecoriolis.sheet.actor .ship .module-list .module-category-header:first-of-type {
+.yzecoriolis.sheet.actor
+  .ship
+  .module-list
+  .module-category-header:first-of-type {
   margin-top: 0px;
 }
 .yzecoriolis.sheet.actor .ship .module-list .module-category-name {
@@ -2488,7 +2884,10 @@ amending some classes to help official modules work in v13
   margin: 0px 0px 0px 5px;
   text-transform: uppercase;
 }
-.yzecoriolis.sheet.actor .ship .module-list .module-category-name:first-of-type {
+.yzecoriolis.sheet.actor
+  .ship
+  .module-list
+  .module-category-name:first-of-type {
   flex: 2.5 0 0;
 }
 .yzecoriolis.sheet.actor .ship .module-list .module-controls {
@@ -2606,7 +3005,10 @@ amending some classes to help official modules work in v13
 .yzecoriolis.sheet.actor .ship .module-list .weapon-img-container.rollable {
   transition: background-image 275ms ease, transform 275ms ease;
 }
-.yzecoriolis.sheet.actor .ship .module-list .weapon-img-container.rollable:hover {
+.yzecoriolis.sheet.actor
+  .ship
+  .module-list
+  .weapon-img-container.rollable:hover {
   background-image: url("icons/rolling-dices-orange.svg") !important;
   transform: scale(1.05);
 }
@@ -2630,7 +3032,9 @@ amending some classes to help official modules work in v13
   background-color: #b1c343;
   color: #081f43;
 }
-.yzecoriolis.sheet.actor .modules-panel .toggle-ship-module-button.enabled:hover {
+.yzecoriolis.sheet.actor
+  .modules-panel
+  .toggle-ship-module-button.enabled:hover {
   background-color: #c1cf6a;
 }
 .yzecoriolis.sheet.actor .modules-panel .item-properties {
@@ -2925,7 +3329,11 @@ amending some classes to help official modules work in v13
   font-size: 13px;
   font-weight: bold;
 }
-.yzecoriolis.sheet.item .feature-section .special-feature-header .feature-controls a.feature-create {
+.yzecoriolis.sheet.item
+  .feature-section
+  .special-feature-header
+  .feature-controls
+  a.feature-create {
   flex: 0 0 100%;
 }
 .yzecoriolis.sheet.item .feature-section .special-feature-header .feature-name {
@@ -2959,7 +3367,11 @@ amending some classes to help official modules work in v13
   text-align: center;
   color: #7a7971;
 }
-.yzecoriolis.sheet.item .feature-section .feature-controls a .itemModifier-create {
+.yzecoriolis.sheet.item
+  .feature-section
+  .feature-controls
+  a
+  .itemModifier-create {
   flex: 0 0 100%;
 }
 .yzecoriolis.sheet.item .sheet-tabs {
@@ -3080,7 +3492,8 @@ amending some classes to help official modules work in v13
   height: 50px;
 }
 .yzecoriolis.darkness-point-display {
-  background: linear-gradient(90deg, #000000 30.35%, rgba(0, 0, 0, 0) 100%), url("images/char-sheet-bg.jpg");
+  background: linear-gradient(90deg, #000000 30.35%, rgba(0, 0, 0, 0) 100%),
+    url("images/char-sheet-bg.jpg");
   margin: -8px;
   display: flex;
   flex-direction: row;
@@ -3108,13 +3521,13 @@ amending some classes to help official modules work in v13
   overflow: hidden;
 }
 /* Changes Radiobuttons to pictures für ship-gunner rolldialog */
-.yzecoriolis.rollModifierDialog.shipGunner [type=radio] {
+.yzecoriolis.rollModifierDialog.shipGunner [type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
-.yzecoriolis.rollModifierDialog.shipGunner [type=radio] + img {
+.yzecoriolis.rollModifierDialog.shipGunner [type="radio"] + img {
   cursor: pointer;
   width: 6em;
   height: 10em;
@@ -3124,12 +3537,12 @@ amending some classes to help official modules work in v13
   border: 0;
   opacity: 0.5;
 }
-.yzecoriolis.rollModifierDialog.shipGunner [type=radio]:hover + img {
+.yzecoriolis.rollModifierDialog.shipGunner [type="radio"]:hover + img {
   opacity: 1;
   box-shadow: 0 0 1em red;
   transition: 0.5s;
 }
-.yzecoriolis.rollModifierDialog.shipGunner [type=radio]:checked + img {
+.yzecoriolis.rollModifierDialog.shipGunner [type="radio"]:checked + img {
   opacity: 1;
   box-shadow: 0 0 1em red;
 }
@@ -3137,7 +3550,7 @@ amending some classes to help official modules work in v13
 /* ----------------------------------------- */
 /*  Dark Theme handler                       */
 /* ----------------------------------------- */
-select[name="core.uiConfig.colorScheme.applications"]{
+select[name="core.uiConfig.colorScheme.applications"] {
   option[value="dark"],
   option[value=""] {
     display: none;

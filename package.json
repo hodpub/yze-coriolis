@@ -7,6 +7,7 @@
     "compile": "gulp css",
     "watch": "gulp",
     "gulp": "gulp",
+    "build:packs": "bash ./build/build-packs.sh",
     "format": "prettier --write .",
     "lint": "eslint --ext .js .",
     "lint:watch": "esw -w ."
@@ -24,6 +25,7 @@
     "gulp-sourcemaps": "^2.6.5"
   },
   "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "^3.0.4",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-foundry-vtt": "0.0.1",

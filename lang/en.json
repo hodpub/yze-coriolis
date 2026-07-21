@@ -439,7 +439,7 @@
   "YZECORIOLIS.ItemDeleteConfirmationContent": "Are you sure you want to delete this item?",
   "YZECORIOLIS.AutomaticFire": "Automatic fire",
   "YZECORIOLIS.AutomaticFireModifier": "-2 modifier to your attack roll",
-  
+
   "YZECORIOLIS.RollTotal": "Total rolled",
   "YZECORIOLIS.RollSubstitute": "Desperation roll (2d6) instead of",
   "YZECORIOLIS.RollVisibility": "Roll Visibility",
@@ -467,5 +467,4 @@
   "YZECORIOLIS.AttrAll": "All Attributes",
   "YZECORIOLIS.SkillCatGeneralAll": "All General Skills",
   "YZECORIOLIS.SkillCatAdvancedAll": "All Advanced Skills"
-
 }

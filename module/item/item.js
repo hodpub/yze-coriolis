@@ -1,5 +1,5 @@
 import { CoriolisModifierDialog } from "../coriolisRollModifier.js";
-import { migrateBlastPower, migrateTalentBonus } from "../migration.js";
+import { migrateTalentBonus } from "../migration.js";
 /**
  * Extend the basic Item with some very simple modifications.
  * @extends {Item}
@@ -16,12 +16,6 @@ export class yzecoriolisItem extends Item {
     // Get the Item's data
     const itemData = this;
     if (itemData.type === "talent") this._prepareTalentData(itemData);
-
-    // Migrate wrong blastPower-values
-    if (itemData.type === "weapon" && itemData.system.explosive) {
-      // TODO: move this to migrateData
-      migrateBlastPower(itemData);
-    }
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -31,6 +25,14 @@ export class yzecoriolisItem extends Item {
 
   static migrateData(source) {
     migrateTalentBonus(source);
+    if (
+      source.type === "weapon" &&
+      source.system?.explosive &&
+      source.system?.crit?.blastPower
+    ) {
+      source.system.blastPower = source.system.crit.blastPower;
+      source.system.crit.blastPower = null;
+    }
     return super.migrateData(source);
   }
 
@@ -39,7 +41,10 @@ export class yzecoriolisItem extends Item {
     // for cloning operations just keep the image. this is a brittle hack. Would
     // like to find a way to override item icons on create, but ignore it on
     // cloning and imports from compendiums.
-    if (hasProperty(initData, "img") && initData.img !== Item.DEFAULT_ICON) {
+    if (
+      foundry.utils.hasProperty(initData, "img") &&
+      initData.img !== Item.DEFAULT_ICON
+    ) {
       return;
     }
     let itemType = initData.type;
@@ -110,7 +115,7 @@ export class yzecoriolisItem extends Item {
     const sysData = foundry.utils.deepClone(this.system);
     const labels = this.labels;
     // Rich text description
-    sysData.description = await TextEditor.enrichHTML(
+    sysData.description = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       sysData.description,
       htmlOptions
     );
@@ -138,7 +143,7 @@ export class yzecoriolisItem extends Item {
         ? Object.values(this.system.itemModifiers)
         : "",
     };
-    const html = await renderTemplate(
+    const html = await foundry.applications.handlebars.renderTemplate(
       `systems/yzecoriolis/templates/sidebar/item.html`,
       templateData
     );

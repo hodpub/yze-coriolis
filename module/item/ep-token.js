@@ -158,7 +158,7 @@ export const canChangeEPForShip = (shipEntity) => {
 
   for (let e of engineers) {
     const entity = getActorDataById(e._id);
-    if (hasOwnerPermissionLevel(entity?.permission)) {
+    if (hasOwnerPermissionLevel(entity)) {
       return true;
     }
   }

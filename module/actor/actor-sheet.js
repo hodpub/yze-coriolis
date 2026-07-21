@@ -8,6 +8,9 @@ import {
 } from "./databar.js";
 import { buildCrewOptionsArray } from "./crew.js";
 
+const { ActorSheet } = foundry.appv1.sheets;
+const { Dialog } = foundry.appv1.api;
+
 /**
  * Extend the basic ActorSheet for a basic Coriolis character
  * @extends {ActorSheet}
@@ -58,9 +61,10 @@ export class yzecoriolisActorSheet extends ActorSheet {
       itemData = this._prepareCharacterItems(baseData.actor);
       actorStats = this._prepCharacterStats(baseData.actor.system);
     }
-    const bioNotes = await TextEditor.enrichHTML(baseData.actor.system.notes, {
-      async: true,
-    });
+    const bioNotes = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      baseData.actor.system.notes,
+      { async: true }
+    );
     const sheetData = {
       editable: baseData.editable,
       owner: baseData.actor.isOwner,

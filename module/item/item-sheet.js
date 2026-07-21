@@ -1,4 +1,7 @@
 import { getID } from "../util.js";
+
+const { ItemSheet } = foundry.appv1.sheets;
+
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
@@ -36,7 +39,7 @@ export class yzecoriolisItemSheet extends ItemSheet {
   /** @override */
   async getData(options) {
     const baseData = super.getData(options);
-    const itemDescript = await TextEditor.enrichHTML(
+    const itemDescript = await foundry.applications.ux.TextEditor.implementation.enrichHTML(
       baseData.item.system.description,
       {
         async: true,
@@ -75,11 +78,15 @@ export class yzecoriolisItemSheet extends ItemSheet {
     // Roll handlers, click handlers, etc. would go here.
     // Add Inventory Item or Modifier
     html.find(".feature-create").click(this._onFeatureCreate.bind(this));
-    html.find(".itemModifier-create").click(this._onItemModifierCreate.bind(this));
+    html
+      .find(".itemModifier-create")
+      .click(this._onItemModifierCreate.bind(this));
 
     // // Delete Inventory Item or Modifier
     html.find(".feature-delete").click(this._onFeatureDelete.bind(this));
-    html.find(".itemModifier-delete").click(this._onItemModifierDelete.bind(this));
+    html
+      .find(".itemModifier-delete")
+      .click(this._onItemModifierDelete.bind(this));
   }
 
   _onFeatureCreate(event) {
@@ -108,7 +115,7 @@ export class yzecoriolisItemSheet extends ItemSheet {
     await this.object.update({ "system.special": null }, { render: false });
     await this.object.update({ "system.special": features });
   }
-  
+
   _onItemModifierCreate(event) {
     event.preventDefault();
     const name = "";
@@ -123,7 +130,9 @@ export class yzecoriolisItemSheet extends ItemSheet {
 
   _onItemModifierDelete(event) {
     const li = $(event.currentTarget).parents(".special-feature");
-    let itemModifiers = foundry.utils.deepClone(this.object.system.itemModifiers);
+    let itemModifiers = foundry.utils.deepClone(
+      this.object.system.itemModifiers
+    );
     let targetKey = li.data("itemId");
     delete itemModifiers[targetKey];
     li.slideUp(200, async () => {
@@ -132,7 +141,10 @@ export class yzecoriolisItemSheet extends ItemSheet {
   }
 
   async _setItemModifiers(itemModifiers) {
-    await this.object.update({ "system.itemModifiers": null }, { render: false });
+    await this.object.update(
+      { "system.itemModifiers": null },
+      { render: false }
+    );
     await this.object.update({ "system.itemModifiers": itemModifiers });
   }
 }

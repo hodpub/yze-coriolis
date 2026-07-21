@@ -81,10 +81,35 @@ jobs:
       - uses: actions/checkout@v2
         if: ${{ steps.release_pr.outputs.release_created }}
 
-      # zip our assets
+      # Build LevelDB packs from packs/source
+      - name: Setup Node
+        if: ${{ steps.release_pr.outputs.release_created }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: yarn
+
+      - name: Install dependencies
+        if: ${{ steps.release_pr.outputs.release_created }}
+        run: yarn install --frozen-lockfile
+
+      - name: Build Compendium Packs
+        if: ${{ steps.release_pr.outputs.release_created }}
+        run: yarn build:packs
+
+      # zip our assets (compiled packs only — exclude JSON source and tooling)
       - name: "Create Zipped Artifact"
         if: ${{ steps.release_pr.outputs.release_created }}
-        run: zip -r ./coriolis.zip LICENSE README.md CHANGELOG.md system.json template.json css/ data/ images/ lang/ lib/ module/ packs/ templates/
+        run: |
+          zip -r ./coriolis.zip \
+            LICENSE README.md CHANGELOG.md system.json template.json \
+            css/ data/ images/ lang/ lib/ module/ packs/ templates/ \
+            -x "packs/source/*" \
+            -x "packs/*.db" \
+            -x "build/*" \
+            -x "node_modules/*" \
+            -x "package.json" \
+            -x "yarn.lock"
 
       # upload zip artifact
       - name: "📦 Add coriolis.zip to Release 📦"
@@ -130,16 +155,16 @@ jobs:
                   "compatibility": ${{ env.COMPATIBILITY }}
               }
           }')
-          
+
           # extract the body
           HTTP_BODY=$(echo $HTTP_RESPONSE | sed -e 's/HTTPSTATUS\:.*//g')
-          
+
           # extract the status
           HTTP_STATUS=$(echo $HTTP_RESPONSE | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
-          
+
           # print the body
           echo "$HTTP_BODY"
-          
+
           # example using the status
           if [ ! $HTTP_STATUS -eq 200  ]; then
             echo "Error [HTTP status: $HTTP_STATUS]"
